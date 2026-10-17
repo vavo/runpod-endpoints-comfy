@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.2] - 2026-10-17
+
+- Accept the exact RunPod proxy origin derived from trusted pod configuration, plus explicitly configured reverse-proxy origins. Reject other pods/ports and untrusted forwarded headers.
+- Return readable JSON errors when origin checks fail.
+
 ## [0.2.1] - 2026-10-17
 
 - Register the Forma settings panel through the compatible settings API so it also appears on older hosted ComfyUI frontends.

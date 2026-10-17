@@ -80,6 +80,22 @@ class SettingsTests(unittest.IsolatedAsyncioTestCase):
         self.request.assert_not_called()
         self.assertFalse(self.path.exists())
 
+    async def test_runpod_proxy_uses_only_the_trusted_pod_and_actual_port(self):
+        server = types.SimpleNamespace(PromptServer=types.SimpleNamespace(instance=types.SimpleNamespace(port=5555)))
+        with patch.dict(os.environ, {"RUNPOD_POD_ID": "mypod"}), patch.dict(sys.modules, {"server": server}):
+            response = await self.save(headers={**self.headers, "Origin": "https://mypod-5555.proxy.runpod.net"})
+            self.assertEqual(response.status, 200)
+            for origin in ("https://otherpod-5555.proxy.runpod.net", "https://mypod-8888.proxy.runpod.net"):
+                response = await self.save(headers={**self.headers, "Origin": origin, "X-Forwarded-Host": origin.split("//")[1]})
+                self.assertEqual(response.status, 403)
+                self.assertIn("error", await response.json())
+
+    async def test_custom_proxy_requires_explicit_server_configuration(self):
+        headers = {**self.headers, "Origin": "https://comfy.example"}
+        self.assertEqual((await self.save(headers=headers)).status, 403)
+        with patch.dict(os.environ, {"FORMA_COMFY_ORIGIN": "https://comfy.example"}):
+            self.assertEqual((await self.save(headers=headers)).status, 200)
+
     async def test_http_remote_origin_is_denied_even_with_matching_host(self):
         response = await self.save(headers={"Origin": "http://public.example", "Host": "public.example", "X-Forma-Settings": "1"})
         self.assertEqual(response.status, 403)

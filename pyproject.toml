@@ -1,6 +1,6 @@
 [project]
 name = "runpod-endpoints-comfy"
-version = "0.2.1"
+version = "0.2.2"
 description = "Forma account-balance image and video generation nodes for ComfyUI"
 readme = "README.md"
 license = { file = "LICENSE" }

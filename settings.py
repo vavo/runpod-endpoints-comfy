@@ -1,5 +1,7 @@
 """Write-only credential settings; never return the key to a browser."""
 import asyncio
+import json
+import os
 import re
 from urllib.parse import urlsplit
 from aiohttp import web
@@ -9,14 +11,28 @@ from .client import FormaClient, FormaError, environment_key_configured, key_sta
 NO_STORE = {"Cache-Control": "no-store"}
 
 
+def trusted_proxy_origin():
+    configured = os.environ.get("FORMA_COMFY_ORIGIN", "").rstrip("/")
+    if configured:
+        return configured
+    pod = os.environ.get("RUNPOD_POD_ID", "")
+    if re.fullmatch(r"[a-z0-9]+", pod):
+        from server import PromptServer
+        port = getattr(PromptServer.instance, "port", None)
+        if isinstance(port, int) and 0 < port < 65536:
+            return f"https://{pod}-{port}.proxy.runpod.net"
+    return None
+
+
 def check_origin(request):
     origin = urlsplit(request.headers.get("Origin", ""))
     if (request.headers.get("X-Forma-Settings") != "1"
-            or origin.netloc != request.host or origin.username or origin.password
+            or (origin.netloc != request.host and request.headers.get("Origin") != trusted_proxy_origin())
+            or origin.username or origin.password
             or origin.path or origin.query or origin.fragment
             or (origin.scheme != "https" and not (
                 origin.scheme == "http" and origin.hostname in ("localhost", "127.0.0.1", "::1")))):
-        raise web.HTTPForbidden(text="Open Forma settings from the same HTTPS ComfyUI instance (or localhost).", headers=NO_STORE)
+        raise web.HTTPForbidden(text=json.dumps({"error": "Open Forma settings from the same HTTPS ComfyUI instance (or localhost). For a reverse proxy, configure FORMA_COMFY_ORIGIN on the server."}), content_type="application/json", headers=NO_STORE)
 
 
 def install_routes(routes):
