@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.1] - 2026-10-17
+
+- Register the Forma settings panel through the compatible settings API so it also appears on older hosted ComfyUI frontends.
+
 ## [0.2.0] - 2026-10-17
 
 - Added Settings → Forma with a masked key field, Save and test key, and Remove saved key.

@@ -77,12 +77,14 @@ function renderKeySettings() {
 
 app.registerExtension({
     name: "Forma.AccountSettings",
-    settings: [{
+    setup() {
+        app.ui.settings.addSetting({
         id: "Forma.Account.APIKey",
         name: "API key",
         category: ["Forma", "Account", "API key"],
         defaultValue: null,
         type: renderKeySettings,
         telemetry: { trackChanges: false },
-    }],
+        });
+    },
 });
