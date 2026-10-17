@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0] - 2026-10-17
+
+- Added Settings → Forma with a masked key field, Save and test key, and Remove saved key.
+- Keys persist privately on the ComfyUI server, outside workflow JSON, normal settings and browser storage. Saving validates access without spending credits and takes effect without restarting.
+- Preserved environment/key-file configuration with host-managed precedence. Added same-origin write protection, bounded input, restrictive file permissions and credential lifecycle tests.
+- Updated starter workflow instructions and declared the existing ComfyUI aiohttp dependency.
+
 ## [0.1.0] - 2026-10-17
 
 ### Added

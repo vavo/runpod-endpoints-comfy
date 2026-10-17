@@ -1,6 +1,8 @@
 """Small Forma client. Credentials never enter a ComfyUI graph or its metadata."""
 import json
 import os
+import re
+import tempfile
 import time
 import uuid
 from pathlib import Path
@@ -20,17 +22,76 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 
+def saved_key_path():
+    # Outside ComfyUI's user-data tree, which has HTTP file read/write routes.
+    try:
+        import folder_paths
+    except ImportError:
+        return None
+    return Path(folder_paths.get_user_directory()).resolve().parent / ".forma" / "api.key"
+
+
+def environment_key_configured():
+    return bool(os.environ.get("FORMA_API_KEY", "").strip() or os.environ.get("FORMA_API_KEY_FILE"))
+
+
+def key_status():
+    path = saved_key_path()
+    managed = environment_key_configured()
+    return {"configured": managed or bool(path and path.is_file()), "managed": managed}
+
+
+def save_key(key):
+    if not isinstance(key, str) or not re.fullmatch(r"forma_[0-9a-f]{64}", key):
+        raise FormaError("Paste a complete Forma API key.")
+    path = saved_key_path()
+    if path is None:
+        raise FormaError("ComfyUI storage is unavailable.")
+    if path.parent.is_symlink():
+        raise FormaError("Forma credential storage must not be a symbolic link.")
+    path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    path.parent.chmod(0o700)
+    name = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", dir=path.parent, delete=False) as output:
+            name = output.name
+            os.chmod(name, 0o600)
+            output.write(key + "\n")
+            output.flush()
+            os.fsync(output.fileno())
+        os.replace(name, path)
+    finally:
+        if name:
+            Path(name).unlink(missing_ok=True)
+
+
+def remove_key():
+    path = saved_key_path()
+    if path:
+        if path.parent.is_symlink():
+            raise FormaError("Forma credential storage must not be a symbolic link.")
+        path.unlink(missing_ok=True)
+
+
 class FormaClient:
-    def __init__(self):
+    def __init__(self, api_key=None):
         self.base = os.environ.get("FORMA_API_URL", "https://forma.cam/api/v1").rstrip("/")
         url = urlsplit(self.base)
         if (url.scheme != "https" and not (url.scheme == "http" and url.hostname in ("localhost", "127.0.0.1"))) or url.username or url.password or url.query or url.fragment:
             raise FormaError("FORMA_API_URL must use HTTPS (HTTP is allowed only on localhost).")
-        self.key = os.environ.get("FORMA_API_KEY", "").strip()
-        if not self.key and os.environ.get("FORMA_API_KEY_FILE"):
-            self.key = Path(os.environ["FORMA_API_KEY_FILE"]).read_text().strip()
+        self.key = api_key if api_key is not None else os.environ.get("FORMA_API_KEY", "").strip()
+        if api_key is None:
+            try:
+                if not self.key and os.environ.get("FORMA_API_KEY_FILE"):
+                    self.key = Path(os.environ["FORMA_API_KEY_FILE"]).read_text().strip()
+                if not self.key and not environment_key_configured():
+                    path = saved_key_path()
+                    if path and path.is_file():
+                        self.key = path.read_text().strip()
+            except OSError:
+                raise FormaError("Cannot read the Forma key. Check the server's credential file permissions.") from None
         if not self.key:
-            raise FormaError("Create a key in Forma Account settings and set FORMA_API_KEY or FORMA_API_KEY_FILE before starting ComfyUI.")
+            raise FormaError("Create a key in Forma Account settings, then open ComfyUI Settings → Forma → API key. Environment variables are also supported.")
         self.opener = build_opener(NoRedirect())
 
     def request(self, path, body=None):

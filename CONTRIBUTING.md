@@ -3,8 +3,9 @@
 Use Python 3.10+ and work in the Python environment used by ComfyUI when testing nodes.
 
 ```sh
+python -m pip install "aiohttp>=3.9"
 python -m unittest discover -s tests -v
-python -m compileall -q __init__.py client.py nodes.py
+python -m compileall -q __init__.py client.py nodes.py settings.py
 ```
 
 The client tests use mocks and never spend Forma credits. To test node registration, install this checkout in an isolated ComfyUI instance and verify `FormaSeedreamImage` and `FormaPrunaAnimate` in `/object_info`. Load the editor workflow and check its controls and connections before changing the JSON.

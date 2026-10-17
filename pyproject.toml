@@ -1,12 +1,12 @@
 [project]
 name = "runpod-endpoints-comfy"
-version = "0.1.0"
+version = "0.2.0"
 description = "Forma account-balance image and video generation nodes for ComfyUI"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
 authors = [{ name = "Michal Vavak" }]
-dependencies = ["numpy>=1.24", "Pillow>=10.0"]
+dependencies = ["numpy>=1.24", "Pillow>=10.0", "aiohttp>=3.9"]
 
 [project.urls]
 Repository = "https://github.com/vavo/runpod-endpoints-comfy"

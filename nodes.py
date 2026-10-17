@@ -17,10 +17,12 @@ SETUP_INSTRUCTIONS = """GET YOUR FORMA API KEY
 
 CONFIGURE COMFYUI
 
-Save the key in a private text file outside this node folder.
-Set FORMA_API_KEY_FILE to that file's absolute path in the environment of the ComfyUI backend process, then restart ComfyUI.
-Alternatively, configure FORMA_API_KEY in your host's secret/environment settings.
-A .env file is not loaded automatically.
+Open ComfyUI Settings → Forma → API key.
+Paste your key in the masked field and click Save and test key.
+The key is stored privately on this ComfyUI server. No restart is needed.
+Use Remove saved key to disconnect; revoke the key in Forma to disable it everywhere.
+
+Advanced: FORMA_API_KEY and FORMA_API_KEY_FILE remain supported and take precedence over the UI. A .env file is not loaded automatically.
 
 NEVER paste your key into this text box, any node input, a prompt, or a workflow JSON. This text is saved with the workflow.
 

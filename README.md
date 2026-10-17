@@ -10,7 +10,7 @@ Generate an image with Seedream 4.0, then animate it with Pruna Video using your
 
 Requires Python 3.10+ and a current ComfyUI installation with native `VIDEO` and `SaveVideo` support. Inference runs in the cloud; these nodes do not require a local inference GPU. ComfyUI still needs its normal Python dependencies and must be able to reach Forma over HTTPS.
 
-**Availability:** this package requires Forma's `/api/v1` backend and Account → API keys feature. Packaging does not deploy that backend. If API keys are not visible in your account, the service rollout is still required.
+Forma API keys and account top-ups are available at [forma.cam](https://forma.cam).
 
 ### Manual install
 
@@ -35,17 +35,17 @@ If you previously installed `comfyui-forma` from the Forma repository, move that
 
 1. Install the package as above.
 2. In Forma, open **Account settings → API keys → Create API key**. Save the key when it is shown. Add funds using Forma's existing top-up flow.
-3. Set `FORMA_API_KEY` in the environment of the process running ComfyUI. Alternatively set `FORMA_API_KEY_FILE` to an absolute path containing the key. Keep that file outside this package, with permissions restricted to your user.
-4. Restart ComfyUI. Use a current release with native `VIDEO`, `SaveVideo`, and `comfy_api.latest.InputImpl.VideoFromFile` support. Dependencies (`torch`, `numpy`, Pillow) are already part of ComfyUI.
+3. Open **ComfyUI Settings → Forma → API key**, paste the key in the masked field, and click **Save and test key**. Validation reads your balance without buying a generation. The key is saved on the ComfyUI server; no restart is needed after saving it.
+4. Use **Remove saved key** to disconnect this instance. To disable the key everywhere, revoke it in Forma. Updating the custom-node package itself still requires a ComfyUI restart and browser refresh.
 5. Open `workflows/image-to-video.json`, edit the prompts, and queue it. Both files are saved by the standard Save Image and Save Video nodes under ComfyUI's output directory.
 
-For a hosted ComfyUI instance, configure the secret on that server through its secret/environment settings. Everyone using that ComfyUI process uses the same Forma account; use a separate instance for each customer account. The host must permit installing custom nodes and making outbound HTTPS requests. This package has not been approved or published for any managed ComfyUI marketplace.
+The settings interface requires HTTPS for remote hosts; localhost HTTP is supported. A saved key lives in `.forma/api.key` beside ComfyUI's resolved user directory, outside the HTTP-accessible user-data folders. The directory is restricted to its owner and the file uses mode 0600 on POSIX systems. It is not encrypted against the server owner or other installed plugins. It is never written to browser local storage, normal ComfyUI settings, or workflow JSON. Everyone using that ComfyUI process uses the same Forma account; use a separate instance for each customer account. The host must permit installing custom nodes and making outbound HTTPS requests. This package has not been approved or published for any managed ComfyUI marketplace.
 
 **Never put the key in a workflow, prompt, screenshot, or shared notebook.** Anyone with the key can generate using your balance and retrieve your creations. Keys can be revoked in Forma. The package never contacts RunPod directly.
 
-### Set the key file
+### Advanced: environment variables or a key file
 
-Create a text file containing only your Forma key, outside the repository. On macOS/Linux, restrict its permissions and set its path in the same terminal or launcher that starts ComfyUI:
+`FORMA_API_KEY` and `FORMA_API_KEY_FILE` remain supported. Host-managed environment configuration takes precedence and disables editing through the interface. Create a text file containing only your Forma key, outside the repository. On macOS/Linux, restrict its permissions and set its path in the same terminal or launcher that starts ComfyUI:
 
 ```sh
 chmod 600 "$HOME/.config/forma/api.key"

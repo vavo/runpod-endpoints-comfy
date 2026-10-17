@@ -2,7 +2,7 @@
 
 ## Credentials and account authority
 
-A Forma API key can spend the issuing account's available balance and retrieve its creations. Store it in the ComfyUI backend environment or a restricted file outside the repository. Never include it in workflows, screenshots, issues, logs or commits. Revoke exposed keys in Forma Account settings.
+A Forma API key can spend the issuing account's available balance and retrieve its creations. Use Settings → Forma to save it in a restricted server file outside the repository and ComfyUI HTTP user-data tree, or use the backend environment. The interface never returns saved keys or stores them in browser storage. Save/remove requests require a matching HTTPS Origin (localhost HTTP is allowed), an explicit header and bounded JSON. These CSRF controls do not authenticate users: protect the ComfyUI instance with host authentication, and only give trusted users access. Never include it in workflows, screenshots, issues, logs or commits. Revoke exposed keys in Forma Account settings.
 
 One ComfyUI process uses one configured Forma account. Everyone able to queue these nodes can spend that account's balance. Installed plugins share the same process and can access its environment; use a trusted, separate instance for each account.
 
