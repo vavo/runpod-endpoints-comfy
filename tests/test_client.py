@@ -125,6 +125,18 @@ class ClientTests(unittest.TestCase):
             self.assertEqual(output.read_bytes(), b"test-video")
         self.assertEqual(requests[0].get_header("Authorization"), "Bearer private-test-key")
         self.assertIsNone(requests[1].get_header("Authorization"))
+        for request in requests:
+            self.assertEqual(request.get_header("User-agent"), module.USER_AGENT)
+
+    def test_api_requests_identify_the_client(self):
+        client = FormaClient(api_key="private-test-key")
+        for body in (None, {"modelId": "example"}):
+            response = io.BytesIO(b'{"ok":true}')
+            with patch.object(client.opener, "open", return_value=response) as opened:
+                self.assertEqual(client.request("/wallet" if body is None else "/quotes", body), {"ok": True})
+                request = opened.call_args.args[0]
+                self.assertEqual(request.get_header("User-agent"), module.USER_AGENT)
+                self.assertEqual(request.get_header("Authorization"), "Bearer private-test-key")
 
     def test_proxy_errors_never_echo_secrets(self):
         with patch.dict(os.environ, {"FORMA_API_KEY": "private-test-key"}, clear=True):

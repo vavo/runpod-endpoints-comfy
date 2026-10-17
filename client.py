@@ -11,6 +11,9 @@ from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 
+USER_AGENT = "Forma-ComfyUI/0.2.3 (+https://github.com/vavo/runpod-endpoints-comfy)"
+
+
 class FormaError(RuntimeError):
     def __init__(self, message, status=None):
         super().__init__(message)
@@ -98,6 +101,7 @@ class FormaClient:
         request = Request(self.base + path, headers={
             "Authorization": "Bearer " + self.key,
             "Content-Type": "application/json",
+            "User-Agent": USER_AGENT,
         }, data=json.dumps(body).encode() if body is not None else None)
         try:
             with self.opener.open(request, timeout=60) as response:
@@ -156,7 +160,7 @@ class FormaClient:
 
     def download(self, job_id, directory, kind):
         job_id = str(uuid.UUID(job_id))
-        request = Request(self.base + f"/jobs/{job_id}/download", headers={"Authorization": "Bearer " + self.key})
+        request = Request(self.base + f"/jobs/{job_id}/download", headers={"Authorization": "Bearer " + self.key, "User-Agent": USER_AGENT})
         path = None
         try:
             try:
@@ -170,7 +174,7 @@ class FormaClient:
                 if url.scheme != "https" or not url.hostname or url.username or url.password:
                     raise FormaError("Forma returned an invalid media URL.")
                 # Signed storage links get NO Forma authorization, even across redirects.
-                response = self.opener.open(Request(location), timeout=120)
+                response = self.opener.open(Request(location, headers={"User-Agent": USER_AGENT}), timeout=120)
             with response:
                 mime = response.headers.get_content_type()
                 extension = {"image/png": ".png", "image/jpeg": ".jpg", "image/webp": ".webp", "video/mp4": ".mp4", "video/webm": ".webm"}.get(mime)

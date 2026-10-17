@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.3] - 2026-10-17
+
+- Identify API and download requests with a Forma ComfyUI user agent so the API edge accepts the client instead of rejecting Python’s default user agent with HTTP 403.
+- Cover request identification and credential-free storage downloads in client tests.
+
 ## [0.2.2] - 2026-10-17
 
 - Accept the exact RunPod proxy origin derived from trusted pod configuration, plus explicitly configured reverse-proxy origins. Reject other pods/ports and untrusted forwarded headers.
