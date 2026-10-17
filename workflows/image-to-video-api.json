@@ -1,0 +1,60 @@
+{
+  "1": {
+    "class_type": "FormaSeedreamImage",
+    "inputs": {
+      "prompt": "A coastal villa at sunset, cinematic photography, warm natural light",
+      "negative_prompt": "",
+      "size": "1280*720",
+      "seed": 42,
+      "run_number": 1,
+      "max_cost_cents": 10
+    }
+  },
+  "2": {
+    "class_type": "FormaPrunaAnimate",
+    "inputs": {
+      "forma_image": [
+        "1",
+        1
+      ],
+      "prompt": "Slow camera push in toward the villa, gentle ocean waves, preserve the architecture",
+      "duration": 5,
+      "resolution": "720p",
+      "fps": 24,
+      "draft": false,
+      "save_audio": true,
+      "prompt_upsampling": true,
+      "seed": 42,
+      "run_number": 1,
+      "max_cost_cents": 25
+    }
+  },
+  "3": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "1",
+        0
+      ],
+      "filename_prefix": "Forma/image"
+    }
+  },
+  "4": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "2",
+        0
+      ],
+      "filename_prefix": "Forma/video",
+      "format": "auto",
+      "codec": "auto"
+    }
+  },
+  "5": {
+    "class_type": "FormaApiKeySetup",
+    "inputs": {
+      "instructions": "GET YOUR FORMA API KEY\n\n1. Open https://forma.cam and sign in or create an account.\n2. Open Account settings \u2192 API keys \u2192 Create API key.\n3. Name the key (for example ComfyUI) and copy it when shown. It is shown only once.\n4. Add funds in Forma. These nodes use the same account balance.\n\nCONFIGURE COMFYUI\n\nSave the key in a private text file outside this node folder.\nSet FORMA_API_KEY_FILE to that file's absolute path in the environment of the ComfyUI backend process, then restart ComfyUI.\nAlternatively, configure FORMA_API_KEY in your host's secret/environment settings.\nA .env file is not loaded automatically.\n\nNEVER paste your key into this text box, any node input, a prompt, or a workflow JSON. This text is saved with the workflow.\n\nOne ComfyUI process uses one Forma account. Anyone who can queue these nodes can spend its balance. Revoke a key in Forma if it is exposed.\n\nIf API keys are not visible in Account settings, the Forma API rollout must be enabled before you can use these nodes.\n\nBefore queueing, review each node's maximum cost in USD cents. Keep run_number unchanged when retrying; increase it only to buy a new generation.\n\nMore help: README.md in runpod-endpoints-comfy"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+[project]
+name = "runpod-endpoints-comfy"
+version = "0.1.0"
+description = "Forma account-balance image and video generation nodes for ComfyUI"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Michal Vavak" }]
+dependencies = ["numpy>=1.24", "Pillow>=10.0"]
+
+[project.urls]
+Repository = "https://github.com/vavo/runpod-endpoints-comfy"
+Documentation = "https://github.com/vavo/runpod-endpoints-comfy#readme"
+"Bug Tracker" = "https://github.com/vavo/runpod-endpoints-comfy/issues"
+Homepage = "https://forma.cam"
+
+[tool.comfy]
+DisplayName = "Forma · RunPod Endpoints"
+# Add the verified Comfy Registry PublisherId before registry publication.
+# Git/ZIP installation does not require a Registry publisher.

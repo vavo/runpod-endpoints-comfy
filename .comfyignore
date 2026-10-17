@@ -1,0 +1,4 @@
+# Keep runtime code, workflows, license and user documentation in the package.
+.github/
+tests/
+CONTRIBUTING.md

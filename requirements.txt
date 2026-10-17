@@ -1,0 +1,4 @@
+# Torch comes from ComfyUI; do not replace its device-specific installation.
+# These packages are normally already present in ComfyUI's environment.
+numpy>=1.24
+Pillow>=10.0
