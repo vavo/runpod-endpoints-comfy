@@ -44,7 +44,9 @@ function renderKeySettings() {
             headers: { "Content-Type": "application/json", "X-Forma-Settings": "1" },
             ...(key === undefined ? {} : { body: JSON.stringify({ key }) }),
         });
-        const body = await response.json();
+        let body;
+        try { body = await response.json(); }
+        catch { throw new Error("ComfyUI is unavailable or restarting. Try again when it reconnects."); }
         if (!response.ok) throw new Error(body.error || "Could not update Forma settings.");
         managed = body.managed;
         configured = body.configured;
