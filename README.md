@@ -2,24 +2,123 @@
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-vavo-5F7FFF?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/vavo) [![Sponsor on GitHub](https://img.shields.io/badge/Sponsor%20on-GitHub-24292F?style=for-the-badge&logo=github)](https://github.com/sponsors/vavo) [![Support on Patreon](https://img.shields.io/badge/Support%20on-Patreon-FF424D?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/vavo)
 
-**Cloud image and video generation through [Forma](https://forma.cam), using your Forma account balance.**
+Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) that run cloud image and video generation through [Forma](https://forma.cam), using your Forma API key and prepaid account balance. Inference runs remotely, so these nodes need no local model weights or inference GPU. The included workflow generates an image, animates it, and saves both outputs in ComfyUI.
 
-Generate an image with Seedream 4.0, then animate it with Pruna Video using your Forma account balance. Inference runs through Forma; no local model weights or GPU inference are needed by these nodes.
+## Quick install
 
-## Installation
-
-Requires Python 3.10+ and a current ComfyUI installation with native `VIDEO` and `SaveVideo` support. Inference runs in the cloud; these nodes do not require a local inference GPU. ComfyUI still needs its normal Python dependencies and must be able to reach Forma over HTTPS.
-
-Forma API keys and account top-ups are available at [forma.cam](https://forma.cam).
-
-### Manual install
-
-From your ComfyUI directory:
+From your ComfyUI directory, using the Python interpreter that runs ComfyUI:
 
 ```sh
 git clone https://github.com/vavo/runpod-endpoints-comfy.git custom_nodes/runpod-endpoints-comfy
 python -m pip install -r custom_nodes/runpod-endpoints-comfy/requirements.txt
 ```
+
+1. Restart ComfyUI and refresh the browser.
+2. At [forma.cam](https://forma.cam), open **Account settings → API keys → Create API key** and add funds to your account.
+3. Open **ComfyUI Settings → Forma → API key**, paste your key, and click **Save and test key**. This checks your balance without spending credits.
+4. Load [image-to-video.json](workflows/image-to-video.json), edit the prompts, and queue the workflow.
+
+Requires Python 3.10+, ComfyUI with native `VIDEO` and `SaveVideo` support, and outbound HTTPS access to Forma. Keys are saved on the ComfyUI server, outside workflow JSON and browser storage.
+
+## Models and workflows
+
+The tables below list all **44 active models in Forma's catalog as of 17 October 2026**, excluding retired entries. Catalog availability can change.
+
+**Current ComfyUI support:** this package exposes Seedream 4.0 T2I through **Forma · Generate Image** and Pruna Video I2V through **Forma · Animate Image**. Other models and workflow modes listed below are available in Forma, but do not yet have nodes in this package; they cannot be selected in the included workflow.
+
+### Workflow types
+
+| Short name | Workflow |
+| --- | --- |
+| T2I | Text to image |
+| I2I | Image to image / image editing |
+| T2V | Text to video |
+| I2V | Image to video |
+| FLF2V | First and last frame to video; an I2V option on models with an ending-frame input |
+| RF2V | Reference images to video (`reference-to-video` in Forma) |
+| V2V | Video to video / video editing |
+| A2V | Audio to video |
+| Motion transfer | Transfer movement from a reference video to an image |
+| Talking portrait | Animate a portrait using speech or singing |
+| T2A | Text to audio / speech |
+| Voice cloning | Generate speech using a voice sample |
+| T2T | Text to text |
+
+### Image models
+
+| Model | Forma model ID | Workflows |
+| --- | --- | --- |
+| Flux Dev | `black-forest-labs-flux-1-dev` | T2I |
+| Flux Kontext Dev | `black-forest-labs-flux-1-kontext-dev` | I2I |
+| Flux Schnell | `black-forest-labs-flux-1-schnell` | T2I |
+| FLUX.2 Klein 9B | `fal-flux-2-klein-9b` | T2I |
+| Nano Banana 2 Edit | `google-nano-banana-2-edit` | I2I |
+| Nano Banana Pro Edit | `nano-banana-pro-edit` | I2I |
+| P-Image Edit | `p-image-edit` | I2I |
+| P-Image T2I | `p-image-t2i` | T2I |
+| Qwen Image | `qwen-image-t2i` | T2I |
+| Qwen Image Edit | `qwen-image-edit` | I2I |
+| Qwen Image Edit 2511 | `qwen-image-edit-2511` | I2I |
+| Qwen Image Edit 2511 LoRA | `qwen-image-edit-2511-lora` | I2I |
+| Qwen Image LoRA | `qwen-image-t2i-lora` | T2I |
+| Seedream 4.0 Edit | `seedream-v4-edit` | I2I |
+| Seedream 4.0 T2I | `seedream-v4-t2i` | T2I |
+| WAN 2.6 T2I | `wan-2-6-t2i` | T2I |
+| Z-Image Turbo | `z-image-turbo` | T2I, I2I |
+
+### Video models
+
+| Model | Forma model ID | Workflows |
+| --- | --- | --- |
+| Hailuo 02 Standard | `minimax-hailuo-02-std` | T2V, I2V, FLF2V |
+| Hailuo 2.3 Fast | `minimax-hailuo-2-3-fast` | I2V |
+| InfiniteTalk | `infinitetalk` | Talking portrait |
+| Kling 3.0 Pro | `fal-kling-v3-pro-i2v` | I2V, FLF2V |
+| Kling v2.6 Motion Control | `kling-v2-6-std-motion-control` | Motion transfer |
+| Kling Video O1 R2V | `kling-video-o1-r2v` | RF2V |
+| Pruna Video | `p-video` | T2V, I2V, A2V |
+| Pruna Video Edit | `p-video-edit` | V2V |
+| Seedance 1.5 Pro I2V (retiring soon) | `seedance-v1-5-pro-i2v` | I2V, FLF2V |
+| Seedance 2.5 I2V | `seedance-2-5-i2v` | I2V, FLF2V |
+| Seedance 2.5 T2V | `seedance-2-5-t2v` | T2V |
+| SORA 2 I2V | `sora-2-i2v` | I2V |
+| SORA 2 Pro I2V | `sora-2-pro-i2v` | I2V |
+| Veo 3.1 Fast | `google-veo3-1-fast-i2v` | I2V, FLF2V |
+| Vidu Q3 I2V | `vidu-q3-i2v` | I2V |
+| Vidu Q3 T2V | `vidu-q3-t2v` | T2V |
+| WAN 2.1 I2V 720p | `wan-2-1-i2v-720` | I2V |
+| WAN 2.2 I2V 720p | `wan-2-2-i2v-720` | I2V |
+| WAN 2.2 I2V 720p LoRA | `wan-2-2-t2v-720-lora` | I2V |
+| WAN 2.5 | `wan-2-5` | I2V |
+| WAN 2.6 I2V | `wan-2-6-i2v` | I2V |
+| WAN 2.6 T2V | `wan-2-6-t2v` | T2V |
+
+### Audio models
+
+| Model | Forma model ID | Workflows |
+| --- | --- | --- |
+| Chatterbox Turbo | `chatterbox-turbo` | T2A, Voice cloning |
+| Minimax Speech 02 HD | `minimax-speech-02-hd` | T2A |
+
+### Text models
+
+| Model | Forma model ID | Workflows |
+| --- | --- | --- |
+| IBM Granite 4.0 | `granite-4-0-h-small` | T2T |
+| Moonshot Kimi | `moonshot-kimi` | T2T |
+| Qwen3 32B AWQ | `qwen3-32b-awq` | T2T |
+
+FLF2V uses the model's I2V workflow with an ending frame; it is not a separate Forma workflow ID. Seedance 2.5 T2V also accepts optional image, video, and audio references within its T2V workflow. Seedance 1.5 Pro I2V is marked as retiring soon in Forma; its suggested replacement is Seedance 2.5 I2V.
+
+### Included ComfyUI nodes
+
+| Node | Supported model / purpose |
+| --- | --- |
+| Forma · API Key Setup | Instructions for creating, funding, and connecting a Forma account |
+| Forma · Generate Image | Seedream 4.0 T2I (`seedream-v4-t2i`), T2I |
+| Forma · Animate Image | Pruna Video (`p-video`), I2V from a Forma image reference |
+
+## Installation details
 
 Use the Python interpreter that runs ComfyUI. For Windows Portable, run the dependency command from the portable installation directory:
 
@@ -75,7 +174,7 @@ The [API-format workflow](workflows/image-to-video-api.json) is for ComfyUI's `/
 
 ## Controls and charging
 
-- **Forma · API Key Setup:** a reusable instructions text node in the Forma category. It explains account creation, one-time key creation, funding, backend environment setup, and key safety. It makes no API calls and needs no connection. The starter workflow places it first; never paste your key into its text box.
+- **Forma · API Key Setup:** a reusable instructions text node in the Forma category. It explains account creation, one-time key creation, funding, ComfyUI settings, and key safety. It makes no API calls and needs no connection. The starter workflow places it first; never paste your key into its text box.
 
 - **Forma · Generate Image:** prompt, negative prompt, size, seed, run number, and maximum image cost in USD cents. Outputs a standard `IMAGE` plus a `FORMA_IMAGE` reference.
 - **Forma · Animate Image:** takes the `FORMA_IMAGE` reference directly. Controls include motion prompt, duration (1–10 seconds), resolution, frame rate, draft mode, audio output, prompt upsampling, seed, run number, and maximum video cost. Outputs native `VIDEO` for Save Video or further processing.
@@ -110,11 +209,11 @@ python3 -m unittest discover -s tests -v
 | --- | --- |
 | Missing Forma nodes | Check the startup log, the custom-node folder location, and dependencies in ComfyUI's Python environment. |
 | Missing `VIDEO` / `SaveVideo` | Update ComfyUI to a version with native video support. |
-| 401 | Configure an active Forma key in the backend process and restart it. |
+| 401 | Save an active key in **Settings → Forma → API key**. For environment-managed keys, update the backend configuration and restart ComfyUI. |
 | 402 | Add funds to the same Forma account that issued the key. |
 | 409 or price-cap error | Review account state and your cost ceiling; keep the run number unchanged when retrying. |
 | 429 | Wait briefly, then retry with the same run number. |
-| No API keys in Forma | The required backend rollout is not available for your account yet. |
+| No API keys in Forma | Sign in and open **Account settings → API keys**. Contact support if the section is missing. |
 | `UNKNOWN` | Check the job in Forma or contact support; do not buy a replacement automatically. |
 
 ## License
