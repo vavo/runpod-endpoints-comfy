@@ -17,6 +17,8 @@ pricing = importlib.import_module(package.__name__ + '.pricing')
 
 class PriceRouteTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
+        self.environment = patch.dict(os.environ, {}, clear=True)
+        self.environment.start()
         routes = web.RouteTableDef()
         pricing.install_price_routes(routes)
         app = web.Application()
@@ -29,6 +31,7 @@ class PriceRouteTests(unittest.IsolatedAsyncioTestCase):
 
     async def asyncTearDown(self):
         self.quote.stop()
+        self.environment.stop()
         await self.http.close()
 
     async def test_same_origin_quote_response_has_no_credentials_or_quote_id(self):
