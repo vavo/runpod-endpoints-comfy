@@ -5,8 +5,11 @@
       "workflow": "image-to-image",
       "workflow.model": "qwen-image-edit-2511",
       "workflow.model.prompt": "A quiet coastline",
-      "workflow.model.images": "Reference",
-      "workflow.model.images.value": "https://media.example/reference.png",
+      "workflow.model.images": "Local",
+      "workflow.model.images.value": [
+        "3",
+        0
+      ],
       "workflow.model.size": "1024*1024",
       "workflow.model.seed": -1,
       "workflow.model.output_format": "jpeg",
@@ -22,6 +25,12 @@
         0
       ],
       "filename_prefix": "Forma/image-to-image"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "choose-your-images.png"
     }
   }
 }

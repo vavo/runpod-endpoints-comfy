@@ -6,8 +6,11 @@
       "workflow.model": "p-video",
       "workflow.model.prompt": "A quiet coastline",
       "workflow.model.image": "None",
-      "workflow.model.audio": "Reference",
-      "workflow.model.audio.value": "https://media.example/reference.png",
+      "workflow.model.audio": "Local",
+      "workflow.model.audio.value": [
+        "3",
+        0
+      ],
       "workflow.model.duration": 5,
       "workflow.model.resolution": "720p",
       "workflow.model.fps": 24,
@@ -30,6 +33,12 @@
       "filename_prefix": "Forma/audio-to-video",
       "format": "auto",
       "codec": "auto"
+    }
+  },
+  "3": {
+    "class_type": "LoadAudio",
+    "inputs": {
+      "audio": "choose-your-audio.wav"
     }
   }
 }

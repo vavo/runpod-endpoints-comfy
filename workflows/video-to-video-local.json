@@ -1,0 +1,280 @@
+{
+  "last_node_id": 4,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "LoadVideo",
+      "pos": [
+        60,
+        80
+      ],
+      "size": [
+        360,
+        320
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadVideo"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "title": "Source video (up to 15 seconds) \u00b7 LoadVideo"
+    },
+    {
+      "id": 1,
+      "type": "FormaVideo",
+      "pos": [
+        500,
+        80
+      ],
+      "size": [
+        480,
+        660
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "workflow",
+          "type": "COMFY_DYNAMICCOMBO_V3",
+          "link": null,
+          "widget": {
+            "name": "workflow"
+          }
+        },
+        {
+          "name": "workflow.model",
+          "type": "COMFY_DYNAMICCOMBO_V3",
+          "link": null,
+          "widget": {
+            "name": "workflow.model"
+          }
+        },
+        {
+          "name": "workflow.model.prompt",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "workflow.model.prompt"
+          }
+        },
+        {
+          "name": "workflow.model.video",
+          "type": "COMFY_DYNAMICCOMBO_V3",
+          "link": null,
+          "widget": {
+            "name": "workflow.model.video"
+          }
+        },
+        {
+          "name": "workflow.model.video.value",
+          "type": "VIDEO",
+          "link": 3
+        },
+        {
+          "name": "workflow.model.images",
+          "type": "COMFY_DYNAMICCOMBO_V3",
+          "link": null,
+          "widget": {
+            "name": "workflow.model.images"
+          }
+        },
+        {
+          "name": "workflow.model.prompt_upsampling",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "workflow.model.prompt_upsampling"
+          }
+        },
+        {
+          "name": "workflow.model.draft",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "workflow.model.draft"
+          }
+        },
+        {
+          "name": "workflow.model.save_audio",
+          "type": "BOOLEAN",
+          "link": null,
+          "widget": {
+            "name": "workflow.model.save_audio"
+          }
+        },
+        {
+          "name": "workflow.model.seed",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "workflow.model.seed"
+          }
+        },
+        {
+          "name": "run_number",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "run_number"
+          }
+        },
+        {
+          "name": "max_cost_cents",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "max_cost_cents"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "forma_reference",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FormaVideo"
+      },
+      "widgets_values": [
+        "video-to-video",
+        "p-video-edit",
+        "A quiet coastline",
+        "Local",
+        "None",
+        true,
+        false,
+        true,
+        0,
+        1,
+        25
+      ],
+      "widgets_values_named": {
+        "workflow": "video-to-video",
+        "workflow.model": "p-video-edit",
+        "workflow.model.prompt": "A quiet coastline",
+        "workflow.model.video": "Local",
+        "workflow.model.images": "None",
+        "workflow.model.prompt_upsampling": true,
+        "workflow.model.draft": false,
+        "workflow.model.save_audio": true,
+        "workflow.model.seed": 0,
+        "run_number": 1,
+        "max_cost_cents": 25
+      }
+    },
+    {
+      "id": 2,
+      "type": "SaveVideo",
+      "pos": [
+        1100,
+        80
+      ],
+      "size": [
+        480,
+        400
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveVideo"
+      },
+      "widgets_values": [
+        "Forma/video",
+        "auto",
+        "auto"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "FormaApiKeySetup",
+      "title": "Forma \u00b7 API Key Setup \u2014 Start Here",
+      "pos": [
+        1100,
+        480
+      ],
+      "size": [
+        500,
+        850
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "FormaApiKeySetup"
+      },
+      "widgets_values": [
+        "GET YOUR FORMA API KEY\n\n1. Open https://forma.cam and sign in or create an account.\n2. Open Account settings \u2192 API keys \u2192 Create API key.\n3. Name the key (for example ComfyUI) and copy it when shown. It is shown only once.\n4. Add funds in Forma. These nodes use the same account balance.\n\nCONFIGURE COMFYUI\n\nOpen ComfyUI Settings \u2192 Forma \u2192 API key.\nPaste your key in the masked field and click Save and test key.\nThe key is stored privately on this ComfyUI server. No restart is needed.\nUse Remove saved key to disconnect; revoke the key in Forma to disable it everywhere.\n\nAdvanced: FORMA_API_KEY and FORMA_API_KEY_FILE remain supported and take precedence over the UI. A .env file is not loaded automatically.\n\nNEVER paste your key into this text box, any node input, a prompt, or a workflow JSON. This text is saved with the workflow.\n\nOne ComfyUI process uses one Forma account. Anyone who can queue these nodes can spend its balance. Revoke a key in Forma if it is exposed.\n\nIf API keys are not visible in Account settings, the Forma API rollout must be enabled before you can use these nodes.\n\nBefore queueing, review each node's maximum cost in USD cents. Keep run_number unchanged when retrying; increase it only to buy a new generation.\n\nMore help: README.md in runpod-endpoints-comfy"
+      ],
+      "color": "#234",
+      "bgcolor": "#345"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "VIDEO"
+    ],
+    [
+      3,
+      3,
+      0,
+      1,
+      4,
+      "VIDEO"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7,
+      "offset": [
+        20,
+        60
+      ]
+    }
+  },
+  "version": 0.4
+}

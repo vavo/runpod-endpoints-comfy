@@ -5,8 +5,11 @@
       "workflow": "video-to-video",
       "workflow.model": "p-video-edit",
       "workflow.model.prompt": "A quiet coastline",
-      "workflow.model.video": "Reference",
-      "workflow.model.video.value": "https://media.example/reference.png",
+      "workflow.model.video": "Local",
+      "workflow.model.video.value": [
+        "3",
+        0
+      ],
       "workflow.model.images": "None",
       "workflow.model.prompt_upsampling": true,
       "workflow.model.draft": false,
@@ -26,6 +29,12 @@
       "filename_prefix": "Forma/video-to-video",
       "format": "auto",
       "codec": "auto"
+    }
+  },
+  "3": {
+    "class_type": "LoadVideo",
+    "inputs": {
+      "file": "choose-your-video.mp4"
     }
   }
 }

@@ -31,3 +31,7 @@ The deployed Forma API is authoritative for availability, model pricing, rate li
 The bundled `models.json` mirrors Forma's managed image/video catalog. Server quotes remain authoritative for availability, supported inputs and pricing. `first-last-frame-to-video` is a node selector alias that sends `image-to-video` with both frame inputs to Forma.
 
 Uploads send raw PNG, MP4 or WAV bytes to `/uploads`, with `X-Upload-Id` derived from MIME type, SHA-256 of the bytes and run number. Forma scopes that UUID to the authenticated account and returns the same asset for identical retries; changed bytes under the same ID return 409 and removed/expired assets return 410. Reference uploads require a funded account, are limited to 128 MB and retain existing library quotas and retention. Uploads are not inference purchases. Never retry with a new run number automatically.
+
+## ComfyUI price preview
+
+The local `POST /forma/price` route accepts a Forma node's serialized inputs plus its source-node definitions. It requires the same-origin protection header used by settings and never executes the submitted graph. Only direct LoadImage, LoadVideo and LoadAudio file sources inside ComfyUI's input directory are resolved. The route uploads local references if needed and calls Forma `/quotes`; it returns only `cents` and `expires`, with no quote ID, key or job submission. Running the generation node still obtains its own fresh quote and enforces the spending limit.

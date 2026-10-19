@@ -31,11 +31,23 @@ The tables below list all **44 active models in Forma's catalog as of 19 October
 1. Add **Forma · Image (Choose Model)** or **Forma · Video (Choose Model)** from the Forma category.
 2. Select **workflow**, then **model**. Only compatible models appear; changing either rebuilds the controls, so review the new settings and connections.
 3. For media inputs, select **Local** to connect a native `IMAGE`, `VIDEO`, or `AUDIO`, or **Reference** to paste an owned `asset:UUID` / public HTTPS URL. Optional inputs also offer **None**. Reference lists take one value per line; local image batches supply multiple references up to the model's limit. To reuse generated media, connect a node's `forma_reference` STRING output to the next node's Reference value input.
-4. Set prompts and model controls, check **max_cost_cents**, and run. Models costing more than the default cap stop before inference; raise the cap only if you accept the quoted price.
+4. Set prompts and model controls, then click **Check price**. The node shows the current Forma quote in USD and whether it fits **max_cost_cents**. Checking never starts inference or changes your cap. Click **Run** only when you accept the price; execution gets a fresh quote before purchasing.
 
 FLF2V has its own selector entry and requires both starting and ending frames. RF2V uses `reference-to-video`. Audio-to-video, talking portraits and motion transfer have their required conditioning inputs. LoRA lists use a JSON field with `path` and `scale` entries. Safety follows the Forma account preference; it is not overridden by workflow controls.
 
 Local media is uploaded to your Forma account before quoting. Uploads require a funded account, consume library storage, and follow its retention policy. Each file is limited to 128 MB (your proxy may impose a smaller limit); images are limited to 40 megapixels. Repeating identical bytes with the same run number reuses the owned upload. Keep run numbers unchanged when recovering a request. Expired/removed references stop with an error; intentionally replacing them requires a new run number.
+
+### Start with your own image
+
+Open **[image-to-video-local.json](workflows/image-to-video-local.json)** for `Load Image → Forma Video → Save Video`. Click **choose file to upload** in Load Image, select a model, enter your motion prompt and click **Check price**. This workflow has no image-generation branch.
+
+The [workflow list](workflows/README.md) also includes ready-wired local I2I, first/last-frame, reference-video, talking-portrait and motion-transfer examples. Every required image has a Load Image node; audio/video conditioning has the matching loader. Choose your files before checking a price or running.
+
+### Check price
+
+Both **Choose Model** nodes have a **Check price** button and a **Price (USD)** field. This requests a server quote without queuing ComfyUI or purchasing inference. Editing inputs or letting the quote expire marks the displayed price stale. Your `max_cost_cents` remains a separate spending limit.
+
+Price checks accept direct **Load Image**, **Load Video** (MP4), and **Load Audio** (WAV/MP3/FLAC) connections, or literal **Reference** values. Local files are uploaded to Forma first and use library storage; the account must be funded. They are read only from ComfyUI's input directory. Price checking never executes upstream nodes: a generated or processed reference must already exist and be supplied as an asset/HTTPS reference, or saved and selected in a Load node. The generated-image-to-video starter remains available for chained inference.
 
 The new nodes output native `IMAGE`/`VIDEO` plus a `forma_reference` string. The original fixed-model nodes remain available for existing workflows.
 

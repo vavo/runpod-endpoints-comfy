@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — 2026-10-19
+
+- Add Check price and a USD quote display to both model-selecting nodes, with spending-cap comparison and stale-price detection.
+- Quote checks never queue a graph or submit inference; local reference reads are restricted to the ComfyUI input folder and protected by the existing same-origin checks.
+- Add eight canvas workflows with connected native media loaders, including a standalone image-to-video workflow and two Load Image nodes for first/last-frame video.
+- Update media API templates with native loaders and preserve saved Forma links when dynamic controls rebuild.
+
+
 ## [0.3.0] - 2026-10-19
 
 - Added native workflow/model selectors for all 39 Forma balance-enabled image/video models, with model-specific controls and ten workflow modes.

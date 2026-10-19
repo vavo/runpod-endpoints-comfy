@@ -5,10 +5,16 @@
       "workflow": "talking-portrait",
       "workflow.model": "infinitetalk",
       "workflow.model.prompt": "A quiet coastline",
-      "workflow.model.image": "Reference",
-      "workflow.model.image.value": "https://media.example/reference.png",
-      "workflow.model.audio": "Reference",
-      "workflow.model.audio.value": "https://media.example/reference.png",
+      "workflow.model.image": "Local",
+      "workflow.model.image.value": [
+        "3",
+        0
+      ],
+      "workflow.model.audio": "Local",
+      "workflow.model.audio.value": [
+        "4",
+        0
+      ],
       "workflow.model.size": "480p",
       "run_number": 1,
       "max_cost_cents": 25
@@ -24,6 +30,18 @@
       "filename_prefix": "Forma/talking-portrait",
       "format": "auto",
       "codec": "auto"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "choose-your-image.png"
+    }
+  },
+  "4": {
+    "class_type": "LoadAudio",
+    "inputs": {
+      "audio": "choose-your-audio.wav"
     }
   }
 }

@@ -5,8 +5,11 @@
       "workflow": "image-to-video",
       "workflow.model": "p-video",
       "workflow.model.prompt": "A quiet coastline",
-      "workflow.model.image": "Reference",
-      "workflow.model.image.value": "https://media.example/reference.png",
+      "workflow.model.image": "Local",
+      "workflow.model.image.value": [
+        "3",
+        0
+      ],
       "workflow.model.audio": "None",
       "workflow.model.duration": 5,
       "workflow.model.resolution": "720p",
@@ -30,6 +33,12 @@
       "filename_prefix": "Forma/image-to-video",
       "format": "auto",
       "codec": "auto"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "choose-your-image.png"
     }
   }
 }

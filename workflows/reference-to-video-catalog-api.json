@@ -5,8 +5,11 @@
       "workflow": "reference-to-video",
       "workflow.model": "kling-video-o1-r2v",
       "workflow.model.prompt": "A quiet coastline",
-      "workflow.model.images": "Reference",
-      "workflow.model.images.value": "https://media.example/reference.png",
+      "workflow.model.images": "Local",
+      "workflow.model.images.value": [
+        "3",
+        0
+      ],
       "workflow.model.video": "None",
       "workflow.model.negative_prompt": "",
       "workflow.model.aspect_ratio": "16:9",
@@ -27,6 +30,12 @@
       "filename_prefix": "Forma/reference-to-video",
       "format": "auto",
       "codec": "auto"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "choose-your-images.png"
     }
   }
 }
