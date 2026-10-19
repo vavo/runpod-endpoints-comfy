@@ -2,7 +2,7 @@
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-vavo-5F7FFF?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/vavo) [![Sponsor on GitHub](https://img.shields.io/badge/Sponsor%20on-GitHub-24292F?style=for-the-badge&logo=github)](https://github.com/sponsors/vavo) [![Support on Patreon](https://img.shields.io/badge/Support%20on-Patreon-FF424D?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/vavo)
 
-Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) that run cloud image and video generation through [Forma](https://forma.cam), using your Forma API key and prepaid account balance. Inference runs remotely, so these nodes need no local model weights or inference GPU. Choose a workflow and model in the image or video node, or start with the included image-to-video workflow.
+Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) that run cloud image and video generation through [Forma](https://forma.cam), using your Forma API key and prepaid account balance. Inference runs remotely, so these nodes need no local model weights or inference GPU. Choose a workflow and model in the image or video node, or open a ready-wired example for any supported mode.
 
 ## Quick install
 
@@ -16,7 +16,7 @@ python -m pip install -r custom_nodes/runpod-endpoints-comfy/requirements.txt
 1. Restart ComfyUI and refresh the browser.
 2. At [forma.cam](https://forma.cam), open **Account settings → API keys → Create API key** and add funds to your account.
 3. Open **ComfyUI Settings → Forma → API key**, paste your key, and click **Save and test key**. This checks your balance without spending credits.
-4. Load [choose-model-image-to-video.json](workflows/choose-model-image-to-video.json), choose the workflows/models, edit the prompts, and review the spending caps before queueing.
+4. Open a [workflow example](workflows/README.md), choose a model, edit the prompt, and click **Check price** before queueing. Standalone [text-to-image](workflows/text-to-image.json) and [text-to-video](workflows/text-to-video.json) examples need no input files.
 
 Requires Python 3.10+, current ComfyUI with native V3 `DynamicCombo`, `VIDEO` and `SaveVideo` support, and outbound HTTPS access to Forma. Keys are saved on the ComfyUI server, outside workflow JSON and browser storage.
 
@@ -192,7 +192,9 @@ For Desktop or hosted installations, configure the variable in the environment o
 
 - [Selectable image → video](workflows/choose-model-image-to-video.json): editor workflow with model/workflow dropdowns and native save nodes.
 - [Selectable image → video, API format](workflows/choose-model-image-to-video-api.json): the same graph for `/prompt`.
-- [Workflow examples](workflows/README.md): API templates for all ten supported workflow modes, including required reference inputs.
+- [Text → image](workflows/text-to-image.json): standalone Forma Image → Save Image.
+- [Text → video](workflows/text-to-video.json): standalone Forma Video → Save Video.
+- [Workflow examples](workflows/README.md): canvas workflows and API templates for all ten supported modes, with connected loaders wherever media is required.
 
 ### Legacy starter workflow
 

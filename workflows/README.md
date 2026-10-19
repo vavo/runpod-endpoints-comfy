@@ -4,10 +4,13 @@ Open `choose-model-image-to-video.json` on the ComfyUI canvas for the selectable
 
 For your own image, open **[image-to-video-local.json](image-to-video-local.json)**. It contains Load Image → Forma Video → Save Video, with no image-generation node. Upload/select the image, choose your model, click **Check price**, review the spending limit, then Run.
 
-Other ready-wired **canvas** workflows:
+All ten supported modes have a ready-wired **canvas** workflow. T2I and T2V need only a prompt; choose a model, click **Check price**, review the spending limit, then Run.
 
 | Workflow | File | Connected loaders |
 | --- | --- | --- |
+| Text to image | [text-to-image.json](text-to-image.json) | None; Forma Image → Save Image |
+| Text to video | [text-to-video.json](text-to-video.json) | None; Forma Video → Save Video |
+| Image to video | [image-to-video-local.json](image-to-video-local.json) | Load Image |
 | Image editing | [image-to-image-local.json](image-to-image-local.json) | Load Image |
 | First/last frames | [first-last-frame-to-video-local.json](first-last-frame-to-video-local.json) | Two Load Image nodes |
 | Reference video | [reference-to-video-local.json](reference-to-video-local.json) | Load Image |
@@ -16,7 +19,7 @@ Other ready-wired **canvas** workflows:
 | Audio to video | [audio-to-video-local.json](audio-to-video-local.json) | Load Audio |
 | Video editing | [video-to-video-local.json](video-to-video-local.json) | Load Video |
 
-Choose your own file in each loader. Image lists accept a single image from the supplied loader; connect a supported image batch for more references when running. Check price supports direct loaders and literal references; it never runs preprocessing or generation nodes.
+For media-based modes, choose your own file in each loader. Image lists accept a single image from the supplied loader; connect a supported image batch for more references when running. Check price supports direct loaders and literal references; it never runs preprocessing or generation nodes.
 
 The following files are **API-format graphs** for ComfyUI's `/prompt` endpoint, not editor-format canvas files. Replace each `choose-your-…` filename with a file uploaded to ComfyUI before submitting. Media workflows include connected native loaders. For duration-priced workflows, use an owned uploaded reference so Forma can measure it. Review prompts, model controls and spending caps; these examples do not bypass billing.
 

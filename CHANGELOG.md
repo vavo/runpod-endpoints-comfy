@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add standalone text-to-image and text-to-video canvas workflows with model selectors, Save nodes and API-key instructions, completing editor examples for all ten supported modes.
+
 ## 0.4.1 — 2026-10-19
 
 - Add Check price and a USD quote display to both model-selecting nodes, with spending-cap comparison and stale-price detection.
