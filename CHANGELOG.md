@@ -2,11 +2,21 @@
 
 ## Unreleased
 
-- Refresh the README for the Templates menu, current model selectors and price checks; add screenshots of the current template browser and image-to-video workflow.
+### Added
 
-- Expose the canvas examples through ComfyUI’s native Templates browser, document the Extensions → runpod-endpoints-comfy entry, and move API-only graphs into `workflows/api/` to keep them out of the template list.
+- Standalone text-to-image and text-to-video canvas workflows with model selectors, Save nodes and API-key instructions. All ten supported modes now have ready-to-open examples.
+- Native Templates menu access under **Extensions → runpod-endpoints-comfy**, with 12 canvas templates: ten standalone modes and two image-generation-to-video starters. No manual JSON copying is required.
 
-- Add standalone text-to-image and text-to-video canvas workflows with model selectors, Save nodes and API-key instructions, completing editor examples for all ten supported modes.
+### Changed
+
+- Move API-format graphs to `workflows/api/` so they do not appear as canvas templates; update their documentation links.
+- Refresh the README around installation, template loading, model selection, local media inputs and price checks. Retain the full list of 39 supported models and clearly document the five disabled speech/text entries.
+- Replace outdated setup guidance, shorten legacy-node instructions, and add screenshots of the current Templates menu and image-to-video workflow from a clean local ComfyUI instance.
+
+### Verified
+
+- All 12 native template URLs return editor graphs, and saved connections pass validation. Direct template loading on the pod restores Load Image → Forma Video → Save Video.
+- README model IDs and local links were checked. Template verification and screenshot capture submitted no paid inference.
 
 ## 0.4.1 — 2026-10-19
 
