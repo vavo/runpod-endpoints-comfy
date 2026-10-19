@@ -260,7 +260,7 @@ python3 -m unittest discover -s tests -v
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md), [CHANGELOG.md](CHANGELOG.md), and [SECURITY.md](SECURITY.md). Report reproducible node bugs through [GitHub Issues](https://github.com/vavo/runpod-endpoints-comfy/issues), with credentials, signed URLs, and private prompts removed.
 
-The initial package was extracted from Forma's tested integration. Client unit tests cover request recovery, spending caps, terminal states, interruption, HTTPS configuration, redirect credential handling, and sanitized errors. Local ComfyUI verification uses synthetic media and mocked inference; it does not certify live provider output or production deployment.
+The initial package was extracted from Forma's tested integration. Client unit tests cover request recovery, spending caps, terminal states, interruption, HTTPS configuration, redirect credential handling, and sanitized errors. ComfyUI verification uses synthetic media and mocked inference, plus a live quote-only check on the installed pod. See [verification results](docs/verification.md). No paid provider generation was run for this update.
 
 ---
 
