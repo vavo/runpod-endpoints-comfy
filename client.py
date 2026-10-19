@@ -12,7 +12,7 @@ from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 
-USER_AGENT = "Forma-ComfyUI/0.4.0 (+https://github.com/vavo/runpod-endpoints-comfy)"
+USER_AGENT = "Forma-ComfyUI/0.4.1 (+https://github.com/vavo/runpod-endpoints-comfy)"
 
 
 class FormaError(RuntimeError):

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.0 — 2026-10-19
+## 0.4.1 — 2026-10-19
 
 - Add Check price and a USD quote display to both model-selecting nodes, with spending-cap comparison and stale-price detection.
 - Quote checks never queue a graph or submit inference; local reference reads are restricted to the ComfyUI input folder and protected by the existing same-origin checks.

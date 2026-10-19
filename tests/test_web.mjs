@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
-const code = readFileSync(new URL('../web/forma-pricing.js', import.meta.url), 'utf8').replace(/^import .*;\n/gm, '');
+const code = readFileSync(new URL('../web/forma-pricing-v041.js', import.meta.url), 'utf8').replace(/^import .*;\n/gm, '');
 function fixture() {
     let extension;
     const connected = [];

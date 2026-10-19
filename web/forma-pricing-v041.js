@@ -62,7 +62,7 @@ app.registerExtension({
             const price = this.addWidget("text", "Price (USD)", "Not checked", () => {}, { serialize: false });
             price.disabled = true;
             price.inputEl && (price.inputEl.readOnly = true);
-            this.addWidget("button", "Check price", null, async () => {
+            const checkPrice = async () => {
                 if (busy) return;
                 busy = true;
                 checked = null;
@@ -108,7 +108,14 @@ app.registerExtension({
                     busy = false;
                     this.setDirtyCanvas(true);
                 }
-            }, { serialize: false });
+            };
+            const button = document.createElement("button");
+            button.textContent = "Check price";
+            button.setAttribute("aria-label", "Check Forma price");
+            button.style.cssText = "width:100%;height:28px;cursor:pointer;border:1px solid #666;border-radius:5px;background:var(--comfy-input-bg,#333);color:var(--input-text,#eee)";
+            button.onclick = checkPrice;
+            const action = this.addDOMWidget("Check price", "forma_price_button", button, { serialize: false });
+            action.computeSize = () => [0, 32];
             const configure = this.onConfigure;
             this.onConfigure = function () {
                 const result = configure?.apply(this, arguments);
