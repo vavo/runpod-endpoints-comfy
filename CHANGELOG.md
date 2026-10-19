@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Expose the canvas examples through ComfyUI’s native Templates browser, document the Extensions → runpod-endpoints-comfy entry, and move API-only graphs into `workflows/api/` to keep them out of the template list.
+
 - Add standalone text-to-image and text-to-video canvas workflows with model selectors, Save nodes and API-key instructions, completing editor examples for all ten supported modes.
 
 ## 0.4.1 — 2026-10-19

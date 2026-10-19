@@ -19,3 +19,7 @@ Update CHANGELOG.md for user-visible changes and increment the semantic version 
 GitHub installation works without a Comfy Registry account. Before publishing there, create or verify the owner's publisher, set its actual `PublisherId` in `[tool.comfy]`, review the packaged files, and publish deliberately. No automatic publication or registry token is configured in this repository.
 
 See the official [publishing guide](https://docs.comfy.org/registry/publishing) and [metadata specification](https://docs.comfy.org/registry/specifications). `.comfyignore` excludes development-only files from registry archives.
+
+## Workflow templates
+
+Keep editor-format examples in `workflows/`; ComfyUI discovers these in **Templates → Extensions → runpod-endpoints-comfy**. Keep API-format graphs in `workflows/api/` so they are not listed as canvas templates. Update the workflow list when adding an example and verify it opens from the Templates menu with its media and Save connections intact.

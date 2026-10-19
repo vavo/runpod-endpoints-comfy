@@ -16,7 +16,7 @@ python -m pip install -r custom_nodes/runpod-endpoints-comfy/requirements.txt
 1. Restart ComfyUI and refresh the browser.
 2. At [forma.cam](https://forma.cam), open **Account settings → API keys → Create API key** and add funds to your account.
 3. Open **ComfyUI Settings → Forma → API key**, paste your key, and click **Save and test key**. This checks your balance without spending credits.
-4. Open a [workflow example](workflows/README.md), choose a model, edit the prompt, and click **Check price** before queueing. Standalone [text-to-image](workflows/text-to-image.json) and [text-to-video](workflows/text-to-video.json) examples need no input files.
+4. Click **Templates → runpod-endpoints-comfy** under **Extensions**, then choose a workflow. All ten modes are included, plus the image-generation-to-video starters. Choose a model, edit the prompt, and click **Check price** before queueing. No JSON copying is needed.
 
 Requires Python 3.10+, current ComfyUI with native V3 `DynamicCombo`, `VIDEO` and `SaveVideo` support, and outbound HTTPS access to Forma. Keys are saved on the ComfyUI server, outside workflow JSON and browser storage.
 
@@ -36,6 +36,12 @@ The tables below list all **44 active models in Forma's catalog as of 19 October
 FLF2V has its own selector entry and requires both starting and ending frames. RF2V uses `reference-to-video`. Audio-to-video, talking portraits and motion transfer have their required conditioning inputs. LoRA lists use a JSON field with `path` and `scale` entries. Safety follows the Forma account preference; it is not overridden by workflow controls.
 
 Local media is uploaded to your Forma account before quoting. Uploads require a funded account, consume library storage, and follow its retention policy. Each file is limited to 128 MB (your proxy may impose a smaller limit); images are limited to 40 megapixels. Repeating identical bytes with the same run number reuses the owned upload. Keep run numbers unchanged when recovering a request. Expired/removed references stop with an error; intentionally replacing them requires a new run number.
+
+### Open a template
+
+After installing or updating the nodes, restart ComfyUI and refresh the browser. Open **Templates → Extensions → runpod-endpoints-comfy** and click a card to load a new workflow. The standalone **text-to-image** and **text-to-video** templates need no input files; media-based templates include connected loaders. **choose-model-image-to-video** generates an image and then animates it.
+
+Templates ship with the node package and update with it. Save your edited workflow normally to keep your own copy. The [workflow list](workflows/README.md) also provides direct JSON downloads.
 
 ### Start with your own image
 
@@ -191,7 +197,7 @@ For Desktop or hosted installations, configure the variable in the environment o
 ## Included workflows
 
 - [Selectable image → video](workflows/choose-model-image-to-video.json): editor workflow with model/workflow dropdowns and native save nodes.
-- [Selectable image → video, API format](workflows/choose-model-image-to-video-api.json): the same graph for `/prompt`.
+- [Selectable image → video, API format](workflows/api/choose-model-image-to-video-api.json): the same graph for `/prompt`.
 - [Text → image](workflows/text-to-image.json): standalone Forma Image → Save Image.
 - [Text → video](workflows/text-to-video.json): standalone Forma Video → Save Video.
 - [Workflow examples](workflows/README.md): canvas workflows and API templates for all ten supported modes, with connected loaders wherever media is required.
@@ -205,7 +211,7 @@ Forma · Generate Image ── IMAGE ─────────── Save Imag
                        └─ FORMA_IMAGE ─── Forma · Animate Image ── VIDEO ── Save Video
 ```
 
-The [API-format workflow](workflows/image-to-video-api.json) is for ComfyUI's `/prompt` endpoint. Both legacy workflows use the same two fixed-model generation nodes plus the setup instructions node, followed by ComfyUI's built-in save nodes.
+The [API-format workflow](workflows/api/image-to-video-api.json) is for ComfyUI's `/prompt` endpoint. Both legacy workflows use the same two fixed-model generation nodes plus the setup instructions node, followed by ComfyUI's built-in save nodes.
 
 ## Controls and charging
 
@@ -235,7 +241,7 @@ Polling waits up to 30 minutes, then stops locally. Interrupting ComfyUI stops w
 python3 -m unittest discover -s tests -v
 ```
 
-`workflows/image-to-video-api.json` is the headless ComfyUI `/prompt` graph; `image-to-video.json` is the editor graph. See [the client API contract](docs/api.md) for the HTTP contract used by these nodes.
+`workflows/api/image-to-video-api.json` is the headless ComfyUI `/prompt` graph; `image-to-video.json` is the editor graph. See [the client API contract](docs/api.md) for the HTTP contract used by these nodes.
 
 
 ## Troubleshooting
