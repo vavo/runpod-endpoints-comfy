@@ -9,3 +9,7 @@ Version 0.4.1 (runtime revision `9e683e1`) was installed on the existing RunPod 
 - The wallet response was unchanged after the live checks and the ComfyUI queue remained empty. No paid inference was submitted. This confirms price-check behavior, not successful provider generation for every model.
 
 Price checks may upload selected local references and use Forma library storage. They never execute upstream graph nodes. Saved/generated references must be selected through supported loaders or supplied as literal asset/HTTPS references.
+
+## Native Templates menu
+
+The installed pod lists 12 canvas templates under **Templates → Extensions → runpod-endpoints-comfy**: all ten modes plus the two image-generation-to-video starters. All 12 template URLs returned editor graphs; saved links passed validation against ComfyUI’s native template routes. Opening image-to-video directly from its template card restored Load Image → Forma Video → Save Video without importing a file. API-only graphs are kept in `workflows/api/` and excluded from the template list. README screenshots were captured separately in a clean local ComfyUI instance running the same package on 19 October 2026; no paid inference was submitted.

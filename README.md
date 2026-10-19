@@ -20,15 +20,32 @@ python -m pip install -r custom_nodes/runpod-endpoints-comfy/requirements.txt
 
 Requires Python 3.10+, current ComfyUI with native V3 `DynamicCombo`, `VIDEO` and `SaveVideo` support, and outbound HTTPS access to Forma. Keys are saved on the ComfyUI server, outside workflow JSON and browser storage.
 
-## Models and workflows
+## Open a template
 
-The tables below list all **44 active models in Forma's catalog as of 19 October 2026**, excluding retired entries. Catalog availability can change.
+After installing or updating the nodes, restart ComfyUI and refresh the browser. Open **Templates → Extensions → runpod-endpoints-comfy** and click a card to load a new workflow. The standalone **text-to-image** and **text-to-video** templates need no input files; media-based templates include connected loaders. **choose-model-image-to-video** generates an image and then animates it.
 
-**Current ComfyUI support:** all **39 image/video models** below are selectable in **Forma · Image (Choose Model)** and **Forma · Video (Choose Model)**. The five speech/text catalog entries are not enabled for Forma account-balance inference and are excluded from the selectors. Their billing must be implemented on Forma before they can be used here.
+Templates ship with the node package and update with it. Save your edited workflow normally to keep your own copy. The [workflow list](workflows/README.md) also provides direct JSON downloads.
+
+![Forma workflows in ComfyUI’s Templates menu](docs/images/templates.png)
+
+The menu contains **12 canvas templates**: one for each of the ten modes below, the **choose-model-image-to-video** chain, and the legacy **image-to-video** chain. API-format graphs are in [`workflows/api/`](workflows/api/) for programmatic use.
+
+| Mode | Template | Input files |
+| --- | --- | --- |
+| T2I | `text-to-image` | None |
+| T2V | `text-to-video` | None |
+| I2I | `image-to-image-local` | Image |
+| I2V | `image-to-video-local` | Image |
+| FLF2V | `first-last-frame-to-video-local` | First and last images |
+| RF2V | `reference-to-video-local` | Reference image(s) |
+| V2V | `video-to-video-local` | Video |
+| A2V | `audio-to-video-local` | Audio |
+| Talking portrait | `talking-portrait-local` | Image and audio |
+| Motion transfer | `motion-transfer-local` | Image and video |
 
 ### Choosing a model
 
-1. Add **Forma · Image (Choose Model)** or **Forma · Video (Choose Model)** from the Forma category.
+1. Open a template, or add **Forma · Image (Choose Model)** / **Forma · Video (Choose Model)** from the Forma category.
 2. Select **workflow**, then **model**. Only compatible models appear; changing either rebuilds the controls, so review the new settings and connections.
 3. For media inputs, select **Local** to connect a native `IMAGE`, `VIDEO`, or `AUDIO`, or **Reference** to paste an owned `asset:UUID` / public HTTPS URL. Optional inputs also offer **None**. Reference lists take one value per line; local image batches supply multiple references up to the model's limit. To reuse generated media, connect a node's `forma_reference` STRING output to the next node's Reference value input.
 4. Set prompts and model controls, then click **Check price**. The node shows the current Forma quote in USD and whether it fits **max_cost_cents**. Checking never starts inference or changes your cap. Click **Run** only when you accept the price; execution gets a fresh quote before purchasing.
@@ -37,17 +54,15 @@ FLF2V has its own selector entry and requires both starting and ending frames. R
 
 Local media is uploaded to your Forma account before quoting. Uploads require a funded account, consume library storage, and follow its retention policy. Each file is limited to 128 MB (your proxy may impose a smaller limit); images are limited to 40 megapixels. Repeating identical bytes with the same run number reuses the owned upload. Keep run numbers unchanged when recovering a request. Expired/removed references stop with an error; intentionally replacing them requires a new run number.
 
-### Open a template
-
-After installing or updating the nodes, restart ComfyUI and refresh the browser. Open **Templates → Extensions → runpod-endpoints-comfy** and click a card to load a new workflow. The standalone **text-to-image** and **text-to-video** templates need no input files; media-based templates include connected loaders. **choose-model-image-to-video** generates an image and then animates it.
-
-Templates ship with the node package and update with it. Save your edited workflow normally to keep your own copy. The [workflow list](workflows/README.md) also provides direct JSON downloads.
-
 ### Start with your own image
 
-Open **[image-to-video-local.json](workflows/image-to-video-local.json)** for `Load Image → Forma Video → Save Video`. Click **choose file to upload** in Load Image, select a model, enter your motion prompt and click **Check price**. This workflow has no image-generation branch.
+Choose **image-to-video-local** in Templates for `Load Image → Forma Video → Save Video`. Click **choose file to upload** in Load Image, select a model, enter your motion prompt and click **Check price**. This workflow has no image-generation branch.
 
 The [workflow list](workflows/README.md) also includes ready-wired local I2I, first/last-frame, reference-video, talking-portrait and motion-transfer examples. Every required image has a Load Image node; audio/video conditioning has the matching loader. Choose your files before checking a price or running.
+
+![Image-to-video template with Load Image, model selection, Check price and Save Video](docs/images/image-to-video.png)
+
+Screenshots captured from the current package in a clean local ComfyUI instance on 19 October 2026. The canvas shows the default setup before uploading an image or running inference.
 
 ### Check price
 
@@ -55,25 +70,13 @@ Both **Choose Model** nodes have a **Check price** button and a **Price (USD)** 
 
 Price checks accept direct **Load Image**, **Load Video** (MP4), and **Load Audio** (WAV/MP3/FLAC) connections, or literal **Reference** values. Local files are uploaded to Forma first and use library storage; the account must be funded. They are read only from ComfyUI's input directory. Price checking never executes upstream nodes: a generated or processed reference must already exist and be supplied as an asset/HTTPS reference, or saved and selected in a Load node. The generated-image-to-video starter remains available for chained inference.
 
-The new nodes output native `IMAGE`/`VIDEO` plus a `forma_reference` string. The original fixed-model nodes remain available for existing workflows.
+The model-selecting nodes output native `IMAGE`/`VIDEO` plus a `forma_reference` string. Built-in Save nodes write results to ComfyUI’s output directory.
 
-### Workflow types
+## Models and workflows
 
-| Short name | Workflow |
-| --- | --- |
-| T2I | Text to image |
-| I2I | Image to image / image editing |
-| T2V | Text to video |
-| I2V | Image to video |
-| FLF2V | First and last frame to video; an I2V option on models with an ending-frame input |
-| RF2V | Reference images to video (`reference-to-video` in Forma) |
-| V2V | Video to video / video editing |
-| A2V | Audio to video |
-| Motion transfer | Transfer movement from a reference video to an image |
-| Talking portrait | Animate a portrait using speech or singing |
-| T2A | Text to audio / speech |
-| Voice cloning | Generate speech using a voice sample |
-| T2T | Text to text |
+The bundled catalog contains **39 usable image/video models**: 17 image and 22 video models. The tables below match the selectors in this package. Availability and prices are checked by Forma when you request a quote.
+
+The five speech/text entries are documented separately below and remain disabled because Forma’s account-balance billing is not implemented for them. T2A means text to audio/speech; T2T means text to text.
 
 ### Image models
 
@@ -139,7 +142,7 @@ The new nodes output native `IMAGE`/`VIDEO` plus a `forma_reference` string. The
 | Moonshot Kimi | `moonshot-kimi` | T2T |
 | Qwen3 32B AWQ | `qwen3-32b-awq` | T2T |
 
-FLF2V uses the model's I2V workflow with an ending frame; it is not a separate Forma workflow ID. Seedance 2.5 T2V also accepts optional image, video, and audio references within its T2V workflow. Seedance 1.5 Pro I2V is marked as retiring soon in Forma; its suggested replacement is Seedance 2.5 I2V.
+The ComfyUI **first-last-frame-to-video** selector maps to Forma’s I2V workflow with both frame inputs. Seedance 2.5 T2V also accepts optional image, video, and audio references within its T2V workflow. Seedance 1.5 Pro I2V is marked as retiring soon in Forma; its suggested replacement is Seedance 2.5 I2V.
 
 ### Included ComfyUI nodes
 
@@ -148,8 +151,10 @@ FLF2V uses the model's I2V workflow with an ending frame; it is not a separate F
 | Forma · Image (Choose Model) | All 17 image models: T2I and I2I |
 | Forma · Video (Choose Model) | All 22 video models: T2V, I2V, FLF2V, RF2V, V2V, A2V, talking portraits and motion transfer |
 | Forma · API Key Setup | Instructions for creating, funding, and connecting a Forma account |
-| Forma · Generate Image | Seedream 4.0 T2I (`seedream-v4-t2i`), T2I |
-| Forma · Animate Image | Pruna Video (`p-video`), I2V from a Forma image reference |
+| Forma · Generate Image (legacy) | Seedream 4.0 T2I (`seedream-v4-t2i`), T2I |
+| Forma · Animate Image (legacy) | Pruna Video (`p-video`), I2V from a Forma image reference |
+
+The fixed-model nodes and [legacy starter](workflows/image-to-video.json) remain compatible with existing workflows. New workflows should use the model-selecting nodes. The legacy `FORMA_IMAGE` output refers to the original stored image; use **Local** on a model-selecting node when working with an edited image.
 
 ## Installation details
 
@@ -159,19 +164,28 @@ Use the Python interpreter that runs ComfyUI. For Windows Portable, run the depe
 .\python_embeded\python.exe -m pip install -r .\ComfyUI\custom_nodes\runpod-endpoints-comfy\requirements.txt
 ```
 
-A GitHub ZIP also works: extract it into `custom_nodes/runpod-endpoints-comfy` so `__init__.py` is directly inside that folder. This package is not currently listed in Comfy Registry/Manager; use Git or ZIP installation.
+A GitHub ZIP also works: extract it into `custom_nodes/runpod-endpoints-comfy` so `__init__.py` is directly inside that folder. Use Git or ZIP installation; no Comfy Registry release is configured for this package.
 
 If you previously installed `comfyui-forma` from the Forma repository, move that old folder out of `custom_nodes` before installing this package. Both expose the same node IDs; existing workflows remain compatible.
 
+### Update an existing installation
+
+From your ComfyUI directory:
+
+```sh
+git -C custom_nodes/runpod-endpoints-comfy pull --ff-only
+python -m pip install -r custom_nodes/runpod-endpoints-comfy/requirements.txt
+```
+
+Restart ComfyUI and refresh the browser to load the updated nodes and template list. Saved personal workflows remain separate from the bundled templates.
+
 ### Account and key setup
 
-1. Install the package as above.
-2. In Forma, open **Account settings → API keys → Create API key**. Save the key when it is shown. Add funds using Forma's existing top-up flow.
-3. Open **ComfyUI Settings → Forma → API key**, paste the key in the masked field, and click **Save and test key**. Validation reads your balance without buying a generation. The key is saved on the ComfyUI server; no restart is needed after saving it.
-4. Use **Remove saved key** to disconnect this instance. To disable the key everywhere, revoke it in Forma. Updating the custom-node package itself still requires a ComfyUI restart and browser refresh.
-5. Open `workflows/image-to-video.json`, edit the prompts, and queue it. Both files are saved by the standard Save Image and Save Video nodes under ComfyUI's output directory.
+1. In Forma, open **Account settings → API keys → Create API key**. Save the key when it is shown. Add funds using Forma's existing top-up flow.
+2. Open **ComfyUI Settings → Forma → API key**, paste the key in the masked field, and click **Save and test key**. Validation reads your balance without buying a generation. The key is saved on the ComfyUI server; no restart is needed after saving it.
+3. Use **Remove saved key** to disconnect this instance. To disable the key everywhere, revoke it in Forma. Updating the custom-node package itself still requires a ComfyUI restart and browser refresh.
 
-The settings interface requires HTTPS for remote hosts; localhost HTTP is supported. RunPod proxy addresses are recognized from the server's pod ID and listening port. For another reverse proxy that rewrites Host, set `FORMA_COMFY_ORIGIN=https://your-comfy-host` on the server; forwarded headers are not trusted. A saved key lives in `.forma/api.key` beside ComfyUI's resolved user directory, outside the HTTP-accessible user-data folders. The directory is restricted to its owner and the file uses mode 0600 on POSIX systems. It is not encrypted against the server owner or other installed plugins. It is never written to browser local storage, normal ComfyUI settings, or workflow JSON. Everyone using that ComfyUI process uses the same Forma account; use a separate instance for each customer account. The host must permit installing custom nodes and making outbound HTTPS requests. This package has not been approved or published for any managed ComfyUI marketplace.
+The settings interface requires HTTPS for remote hosts; localhost HTTP is supported. RunPod proxy addresses are recognized from the server's pod ID and listening port. For another reverse proxy that rewrites Host, set `FORMA_COMFY_ORIGIN=https://your-comfy-host` on the server; forwarded headers are not trusted. A saved key lives in `.forma/api.key` beside ComfyUI's resolved user directory, outside the HTTP-accessible user-data folders. The directory is restricted to its owner and the file uses mode 0600 on POSIX systems. It is not encrypted against the server owner or other installed plugins. It is never written to browser local storage, normal ComfyUI settings, or workflow JSON. Everyone using that ComfyUI process uses the same Forma account; use a separate instance for each customer account. The host must permit installing custom nodes and making outbound HTTPS requests.
 
 **Never put the key in a workflow, prompt, screenshot, or shared notebook.** Anyone with the key can generate using your balance and retrieve your creations. Keys can be revoked in Forma. The package never contacts RunPod directly.
 
@@ -194,34 +208,13 @@ $env:FORMA_API_KEY_FILE = "$env:USERPROFILE\.config\forma\api.key"
 
 For Desktop or hosted installations, configure the variable in the environment of the ComfyUI backend process, then fully restart it. A `.env` file is not loaded automatically. `FORMA_API_KEY` takes precedence if both variables are set.
 
-## Included workflows
-
-- [Selectable image → video](workflows/choose-model-image-to-video.json): editor workflow with model/workflow dropdowns and native save nodes.
-- [Selectable image → video, API format](workflows/api/choose-model-image-to-video-api.json): the same graph for `/prompt`.
-- [Text → image](workflows/text-to-image.json): standalone Forma Image → Save Image.
-- [Text → video](workflows/text-to-video.json): standalone Forma Video → Save Video.
-- [Workflow examples](workflows/README.md): canvas workflows and API templates for all ten supported modes, with connected loaders wherever media is required.
-
-### Legacy starter workflow
-
-Open [image-to-video.json](workflows/image-to-video.json) on the ComfyUI canvas:
-
-```text
-Forma · Generate Image ── IMAGE ─────────── Save Image
-                       └─ FORMA_IMAGE ─── Forma · Animate Image ── VIDEO ── Save Video
-```
-
-The [API-format workflow](workflows/api/image-to-video-api.json) is for ComfyUI's `/prompt` endpoint. Both legacy workflows use the same two fixed-model generation nodes plus the setup instructions node, followed by ComfyUI's built-in save nodes.
-
 ## Controls and charging
 
-- **Forma · API Key Setup:** a reusable instructions text node in the Forma category. It explains account creation, one-time key creation, funding, ComfyUI settings, and key safety. It makes no API calls and needs no connection. The starter workflow places it first; never paste your key into its text box.
-
-- **Forma · Generate Image:** prompt, negative prompt, size, seed, run number, and maximum image cost in USD cents. Outputs a standard `IMAGE` plus a `FORMA_IMAGE` reference.
-- **Forma · Animate Image:** takes the `FORMA_IMAGE` reference directly. Controls include motion prompt, duration (1–10 seconds), resolution, frame rate, draft mode, audio output, prompt upsampling, seed, run number, and maximum video cost. Outputs native `VIDEO` for Save Video or further processing.
-- A `FORMA_IMAGE` refers to the original image stored in your Forma account. Editing the standard `IMAGE` output does not change that reference. For local/edited images, use the new **Image/Video (Choose Model)** nodes with a **Local** media input.
-- Each node obtains a server quote before submitting. Default caps are 10 cents for the image and 25 cents for the video; these are spending ceilings, not advertised prices. Requests use paid balance, not website trials. Forma applies your account's safety preference.
-- If a quote exceeds the cap or the balance is insufficient, the node stops before inference. Each stage is billed separately: an image that completed remains charged if animation fails or exceeds its cap.
+- **run_number:** keep it unchanged when retrying; increase it to buy another generation with the same settings.
+- **max_cost_cents:** the maximum allowed cost in USD cents. The included examples use 10 cents for images and 25 cents for videos. These are spending limits; **Check price** shows the quote for your selected settings.
+- Each node gets a fresh server quote before submitting. If the price exceeds your cap or the balance is insufficient, it stops before inference. Each stage is billed separately: a completed image remains charged if animation fails or exceeds its cap.
+- Requests use your prepaid Forma balance, not website trials. Forma applies your account’s safety preference.
+- **Forma · API Key Setup** is a reusable instructions node included in every template. Expand it for account and key setup help. Never paste your key into its text box.
 
 ### Retry without another charge
 
@@ -239,15 +232,17 @@ Polling waits up to 30 minutes, then stops locally. Interrupting ComfyUI stops w
 
 ```sh
 python3 -m unittest discover -s tests -v
+node --test tests/test_web.mjs
 ```
 
-`workflows/api/image-to-video-api.json` is the headless ComfyUI `/prompt` graph; `image-to-video.json` is the editor graph. See [the client API contract](docs/api.md) for the HTTP contract used by these nodes.
+The [`workflows/api/`](workflows/api/) folder contains graphs for ComfyUI’s `/prompt` endpoint; the JSON files directly inside [`workflows/`](workflows/) are editor templates. See [the client API contract](docs/api.md) for the HTTP contract used by these nodes.
 
 
 ## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
+| Missing templates or old cards | Update the package, refresh ComfyUI, and open **Templates → Extensions → runpod-endpoints-comfy**. Restart ComfyUI after installation or a node update. |
 | Missing Forma nodes | Check the startup log, the custom-node folder location, and dependencies in ComfyUI's Python environment. |
 | Missing `VIDEO` / `SaveVideo` / `DynamicCombo` | Update ComfyUI and its frontend together, restart, then refresh the browser. |
 | Upload 403 | Add funds to the Forma account that issued the API key. |
@@ -268,7 +263,7 @@ python3 -m unittest discover -s tests -v
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md), [CHANGELOG.md](CHANGELOG.md), and [SECURITY.md](SECURITY.md). Report reproducible node bugs through [GitHub Issues](https://github.com/vavo/runpod-endpoints-comfy/issues), with credentials, signed URLs, and private prompts removed.
 
-The initial package was extracted from Forma's tested integration. Client unit tests cover request recovery, spending caps, terminal states, interruption, HTTPS configuration, redirect credential handling, and sanitized errors. ComfyUI verification uses synthetic media and mocked inference, plus a live quote-only check on the installed pod. See [verification results](docs/verification.md). No paid provider generation was run for this update.
+Client unit tests cover request recovery, spending caps, terminal states, interruption, HTTPS configuration, redirect credential handling, and sanitized errors. ComfyUI verification uses synthetic media and mocked inference, plus a live quote-only check on the installed pod. See [verification results](docs/verification.md). Native template discovery and loading were verified on the pod without submitting paid inference.
 
 ---
 
