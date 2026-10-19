@@ -1,0 +1,31 @@
+{
+  "1": {
+    "class_type": "FormaVideo",
+    "inputs": {
+      "workflow": "motion-transfer",
+      "workflow.model": "kling-v2-6-std-motion-control",
+      "workflow.model.image": "Reference",
+      "workflow.model.image.value": "https://media.example/reference.png",
+      "workflow.model.video": "Reference",
+      "workflow.model.video.value": "https://media.example/reference.png",
+      "workflow.model.character_orientation": "video",
+      "workflow.model.prompt": "A quiet coastline",
+      "workflow.model.negative_prompt": "",
+      "workflow.model.keep_original_sound": true,
+      "run_number": 1,
+      "max_cost_cents": 25
+    }
+  },
+  "2": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "1",
+        0
+      ],
+      "filename_prefix": "Forma/motion-transfer",
+      "format": "auto",
+      "codec": "auto"
+    }
+  }
+}

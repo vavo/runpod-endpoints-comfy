@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0] - 2026-10-19
+
+- Added native workflow/model selectors for all 39 Forma balance-enabled image/video models, with model-specific controls and ten workflow modes.
+- Added local IMAGE, VIDEO and AUDIO reference uploads, multi-image batches, first/last-frame inputs and reusable Forma reference outputs.
+- Bound upload retries to content and run number; preserved per-generation caps, recovery and credential protections.
+- Added selectable editor/API starter workflows and API examples for every supported mode. Legacy nodes/workflows remain compatible.
+- Speech, voice cloning and text catalog models remain unavailable until Forma implements their account-balance billing.
+
 ## [0.2.3] - 2026-10-17
 
 - Identify API and download requests with a Forma ComfyUI user agent so the API edge accepts the client instead of rejecting Python’s default user agent with HTTP 403.

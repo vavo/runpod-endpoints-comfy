@@ -1,0 +1,31 @@
+{
+  "1": {
+    "class_type": "FormaVideo",
+    "inputs": {
+      "workflow": "video-to-video",
+      "workflow.model": "p-video-edit",
+      "workflow.model.prompt": "A quiet coastline",
+      "workflow.model.video": "Reference",
+      "workflow.model.video.value": "https://media.example/reference.png",
+      "workflow.model.images": "None",
+      "workflow.model.prompt_upsampling": true,
+      "workflow.model.draft": false,
+      "workflow.model.save_audio": true,
+      "workflow.model.seed": 0,
+      "run_number": 1,
+      "max_cost_cents": 25
+    }
+  },
+  "2": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "1",
+        0
+      ],
+      "filename_prefix": "Forma/video-to-video",
+      "format": "auto",
+      "codec": "auto"
+    }
+  }
+}

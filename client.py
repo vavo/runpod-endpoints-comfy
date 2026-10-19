@@ -1,4 +1,5 @@
 """Small Forma client. Credentials never enter a ComfyUI graph or its metadata."""
+import hashlib
 import json
 import os
 import re
@@ -11,7 +12,7 @@ from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 
-USER_AGENT = "Forma-ComfyUI/0.2.3 (+https://github.com/vavo/runpod-endpoints-comfy)"
+USER_AGENT = "Forma-ComfyUI/0.3.0 (+https://github.com/vavo/runpod-endpoints-comfy)"
 
 
 class FormaError(RuntimeError):
@@ -97,12 +98,13 @@ class FormaClient:
             raise FormaError("Create a key in Forma Account settings, then open ComfyUI Settings → Forma → API key. Environment variables are also supported.")
         self.opener = build_opener(NoRedirect())
 
-    def request(self, path, body=None):
+    def request(self, path, body=None, *, media_type=None, upload_id=None):
         request = Request(self.base + path, headers={
             "Authorization": "Bearer " + self.key,
-            "Content-Type": "application/json",
+            "Content-Type": media_type or "application/json",
+            **({"X-Upload-Id": upload_id} if upload_id else {}),
             "User-Agent": USER_AGENT,
-        }, data=json.dumps(body).encode() if body is not None else None)
+        }, data=body if media_type else json.dumps(body).encode() if body is not None else None)
         try:
             with self.opener.open(request, timeout=60) as response:
                 return json.load(response)
@@ -112,8 +114,10 @@ class FormaClient:
             messages = {
                 401: "Forma API key is invalid or revoked.",
                 402: "Insufficient Forma balance. Add funds at forma.cam.",
-                403: "This operation is not allowed by the Forma API.",
+                403: "Forma denied this operation. Uploads require a funded account; check your account at forma.cam.",
                 404: "Forma job or API route not found.",
+                410: "This Forma reference expired or was removed. Increase the run number only when you intend a new generation.",
+                413: "Media exceeds the upload limit or your Forma storage is full.",
                 409: "Forma rejected the quote, spending limit, or account state. Check your account and retry the same run number.",
                 422: "Forma could not price or use these inputs.",
                 429: "Forma is busy or rate limited. Retry the same run number shortly.",
@@ -121,6 +125,14 @@ class FormaClient:
             raise FormaError(messages.get(error.code, "Forma could not complete the request. Retry the same run number to recover the job."), error.code) from None
         except (URLError, TimeoutError, OSError, ValueError):
             raise FormaError("Lost contact with Forma. Retry the same run number to recover the job without a new charge.") from None
+
+    def upload(self, data, media_type, run_number):
+        if not data or len(data) > 128 * 1024 * 1024:
+            raise FormaError("Reference media must be nonempty and no larger than 128 MB.")
+        digest = hashlib.sha256(media_type.encode() + data).hexdigest()
+        upload_id = str(uuid.uuid5(uuid.NAMESPACE_URL, f"forma-upload:{run_number}:{digest}"))
+        result = self.request("/uploads", data, media_type=media_type, upload_id=upload_id)
+        return "asset:" + str(uuid.UUID(result["job"]["id"]))
 
     def generate(self, options, run_number, node_id, max_cost_cents, interrupt=lambda: None, progress=lambda value: None):
         if not isinstance(max_cost_cents, int) or max_cost_cents < 0:

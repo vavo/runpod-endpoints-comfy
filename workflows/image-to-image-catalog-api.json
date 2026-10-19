@@ -1,0 +1,27 @@
+{
+  "1": {
+    "class_type": "FormaImage",
+    "inputs": {
+      "workflow": "image-to-image",
+      "workflow.model": "qwen-image-edit-2511",
+      "workflow.model.prompt": "A quiet coastline",
+      "workflow.model.images": "Reference",
+      "workflow.model.images.value": "https://media.example/reference.png",
+      "workflow.model.size": "1024*1024",
+      "workflow.model.seed": -1,
+      "workflow.model.output_format": "jpeg",
+      "run_number": 1,
+      "max_cost_cents": 10
+    }
+  },
+  "2": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "1",
+        0
+      ],
+      "filename_prefix": "Forma/image-to-image"
+    }
+  }
+}

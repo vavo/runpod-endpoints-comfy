@@ -1,0 +1,29 @@
+{
+  "1": {
+    "class_type": "FormaVideo",
+    "inputs": {
+      "workflow": "talking-portrait",
+      "workflow.model": "infinitetalk",
+      "workflow.model.prompt": "A quiet coastline",
+      "workflow.model.image": "Reference",
+      "workflow.model.image.value": "https://media.example/reference.png",
+      "workflow.model.audio": "Reference",
+      "workflow.model.audio.value": "https://media.example/reference.png",
+      "workflow.model.size": "480p",
+      "run_number": 1,
+      "max_cost_cents": 25
+    }
+  },
+  "2": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "1",
+        0
+      ],
+      "filename_prefix": "Forma/talking-portrait",
+      "format": "auto",
+      "codec": "auto"
+    }
+  }
+}

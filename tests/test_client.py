@@ -128,6 +128,25 @@ class ClientTests(unittest.TestCase):
         for request in requests:
             self.assertEqual(request.get_header("User-agent"), module.USER_AGENT)
 
+    def test_upload_retries_keep_identity_and_bound_content(self):
+        client = FormaClient(api_key="private-test-key")
+        asset_id = str(uuid.uuid4())
+        requests = []
+        def open_request(request, timeout):
+            requests.append(request)
+            return io.BytesIO(json.dumps({"job": {"id": asset_id}}).encode())
+        with patch.object(client.opener, "open", side_effect=open_request):
+            for data, run in [(b"image-one", 1), (b"image-one", 1), (b"image-two", 1), (b"image-one", 2)]:
+                self.assertEqual(client.upload(data, "image/png", run), "asset:" + asset_id)
+        ids = [request.get_header("X-upload-id") for request in requests]
+        self.assertEqual(ids[0], ids[1])
+        self.assertEqual(len(set(ids)), 3)
+        self.assertEqual(requests[0].data, b"image-one")
+        self.assertEqual(requests[0].get_header("Content-type"), "image/png")
+        for data in (b"", b"x" * (128 * 1024 * 1024 + 1)):
+            with self.assertRaises(FormaError):
+                client.upload(data, "image/png", 1)
+
     def test_api_requests_identify_the_client(self):
         client = FormaClient(api_key="private-test-key")
         for body in (None, {"modelId": "example"}):

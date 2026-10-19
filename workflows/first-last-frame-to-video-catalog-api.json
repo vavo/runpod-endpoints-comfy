@@ -1,0 +1,30 @@
+{
+  "1": {
+    "class_type": "FormaVideo",
+    "inputs": {
+      "workflow": "first-last-frame-to-video",
+      "workflow.model": "minimax-hailuo-02-std",
+      "workflow.model.prompt": "A quiet coastline",
+      "workflow.model.image": "Reference",
+      "workflow.model.image.value": "https://media.example/reference.png",
+      "workflow.model.end_image": "Reference",
+      "workflow.model.end_image.value": "https://media.example/reference.png",
+      "workflow.model.duration": 6,
+      "workflow.model.enable_prompt_expansion": true,
+      "run_number": 1,
+      "max_cost_cents": 25
+    }
+  },
+  "2": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "1",
+        0
+      ],
+      "filename_prefix": "Forma/first-last-frame-to-video",
+      "format": "auto",
+      "codec": "auto"
+    }
+  }
+}

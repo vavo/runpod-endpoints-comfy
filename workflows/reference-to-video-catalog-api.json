@@ -1,0 +1,32 @@
+{
+  "1": {
+    "class_type": "FormaVideo",
+    "inputs": {
+      "workflow": "reference-to-video",
+      "workflow.model": "kling-video-o1-r2v",
+      "workflow.model.prompt": "A quiet coastline",
+      "workflow.model.images": "Reference",
+      "workflow.model.images.value": "https://media.example/reference.png",
+      "workflow.model.video": "None",
+      "workflow.model.negative_prompt": "",
+      "workflow.model.aspect_ratio": "16:9",
+      "workflow.model.duration": 5,
+      "workflow.model.seed": -1,
+      "workflow.model.enable_prompt_expansion": false,
+      "run_number": 1,
+      "max_cost_cents": 25
+    }
+  },
+  "2": {
+    "class_type": "SaveVideo",
+    "inputs": {
+      "video": [
+        "1",
+        0
+      ],
+      "filename_prefix": "Forma/reference-to-video",
+      "format": "auto",
+      "codec": "auto"
+    }
+  }
+}

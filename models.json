@@ -1,0 +1,3094 @@
+[
+  {
+    "id": "black-forest-labs-flux-1-dev",
+    "name": "Flux Dev",
+    "kind": "image",
+    "workflows": [
+      "text-to-image"
+    ],
+    "description": "High-quality image generation with exceptional prompt adherence and rich detail",
+    "pricing": "$0.02 per megapixel",
+    "source": "https://docs.runpod.io/public-endpoints/models/flux-dev",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired image. Be specific and detailed for best results."
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated image. Use this to prevent unwanted features or styles."
+      },
+      {
+        "name": "width",
+        "label": "Width",
+        "type": "integer",
+        "required": false,
+        "description": "Image width in pixels. Must be divisible by 64. Range: 256-1536.",
+        "default": 1024,
+        "min": 256.0,
+        "max": 1536.0,
+        "step": 64
+      },
+      {
+        "name": "height",
+        "label": "Height",
+        "type": "integer",
+        "required": false,
+        "description": "Image height in pixels. Must be divisible by 64. Range: 256-1536.",
+        "default": 1024,
+        "min": 256.0,
+        "max": 1536.0,
+        "step": 64
+      },
+      {
+        "name": "num_inference_steps",
+        "label": "Detail steps",
+        "type": "integer",
+        "required": false,
+        "description": "Number of denoising steps. Higher values produce more detailed images but take longer. Range: 1-50.",
+        "default": 28,
+        "min": 1.0,
+        "max": 50.0
+      },
+      {
+        "name": "guidance",
+        "label": "Follow the prompt",
+        "type": "float",
+        "required": false,
+        "description": "How closely to follow the prompt. Higher values produce images more faithful to the prompt but may reduce creativity. Range: 0.0-10.0.",
+        "default": 7.5,
+        "min": 0.0,
+        "max": 10.0
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Use the same seed with identical parameters to generate the same image. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "image_format",
+        "label": "Image format",
+        "type": "string",
+        "required": false,
+        "description": "Output image format. Accepts png or jpeg.",
+        "default": "jpeg",
+        "choices": [
+          "png",
+          "jpeg"
+        ]
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "black-forest-labs-flux-1-kontext-dev",
+    "name": "Flux Kontext Dev",
+    "kind": "image",
+    "workflows": [
+      "image-to-image"
+    ],
+    "description": "12 billion parameter model for editing images based on text instructions",
+    "pricing": "$0.025 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/flux-kontext-dev",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text instructions describing the desired edits to the image."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the input image to edit.",
+        "media": "image"
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the edited image."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Output image size in format \"width*height\".",
+        "default": "1024*1024"
+      },
+      {
+        "name": "num_inference_steps",
+        "label": "Detail steps",
+        "type": "integer",
+        "required": false,
+        "description": "Number of denoising steps. Higher values produce more detailed edits. Range: 1-50.",
+        "default": 28,
+        "min": 1.0,
+        "max": 50.0
+      },
+      {
+        "name": "guidance",
+        "label": "Follow the prompt",
+        "type": "float",
+        "required": false,
+        "description": "How closely to follow the prompt. Range: 0.0-10.0.",
+        "default": 2.0,
+        "min": 0.0,
+        "max": 10.0
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "output_format",
+        "label": "Output format",
+        "type": "string",
+        "required": false,
+        "description": "Output image format. Accepts png or jpeg.",
+        "default": "png",
+        "choices": [
+          "png",
+          "jpeg"
+        ]
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether to run safety checks on the output.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "black-forest-labs-flux-1-schnell",
+    "name": "Flux Schnell",
+    "kind": "image",
+    "workflows": [
+      "text-to-image"
+    ],
+    "description": "Fast, lightweight image generation optimized for speed and prototyping",
+    "pricing": "$0.0024 per megapixel",
+    "source": "https://docs.runpod.io/public-endpoints/models/flux-schnell",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired image. Be specific and detailed for best results."
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated image. Use this to prevent unwanted features or styles."
+      },
+      {
+        "name": "width",
+        "label": "Width",
+        "type": "integer",
+        "required": false,
+        "description": "Image width in pixels. Must be divisible by 64. Range: 256-1536.",
+        "default": 1024,
+        "min": 256.0,
+        "max": 1536.0,
+        "step": 64
+      },
+      {
+        "name": "height",
+        "label": "Height",
+        "type": "integer",
+        "required": false,
+        "description": "Image height in pixels. Must be divisible by 64. Range: 256-1536.",
+        "default": 1024,
+        "min": 256.0,
+        "max": 1536.0,
+        "step": 64
+      },
+      {
+        "name": "num_inference_steps",
+        "label": "Detail steps",
+        "type": "integer",
+        "required": false,
+        "description": "Number of denoising steps. Schnell is optimized for low step counts. Range: 1-8.",
+        "default": 4,
+        "min": 1.0,
+        "max": 8.0
+      },
+      {
+        "name": "guidance",
+        "label": "Follow the prompt",
+        "type": "float",
+        "required": false,
+        "description": "How closely to follow the prompt. Higher values produce images more faithful to the prompt. Range: 0.0-10.0.",
+        "default": 7.5,
+        "min": 0.0,
+        "max": 10.0
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Use the same seed with identical parameters to generate the same image. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "image_format",
+        "label": "Image format",
+        "type": "string",
+        "required": false,
+        "description": "Output image format. Accepts png or jpeg.",
+        "default": "jpeg",
+        "choices": [
+          "png",
+          "jpeg"
+        ]
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "infinitetalk",
+    "name": "InfiniteTalk",
+    "kind": "video",
+    "workflows": [
+      "talking-portrait"
+    ],
+    "description": "Audio-driven video generation that creates talking or singing videos from a single image",
+    "pricing": "$0.25\u2013$0.50 per video",
+    "source": "https://docs.runpod.io/public-endpoints/models/infinitetalk",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the source image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "audio",
+        "label": "Audio track",
+        "type": "string",
+        "required": true,
+        "description": "URL of the audio file to drive the animation.",
+        "media": "audio"
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": true,
+        "description": "Output video resolution. Valid options: 480p or 720p.",
+        "choices": [
+          "480p",
+          "720p"
+        ],
+        "default": "480p"
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "kling-v2-6-std-motion-control",
+    "name": "Kling v2.6 Motion Control",
+    "kind": "video",
+    "workflows": [
+      "motion-transfer"
+    ],
+    "description": "Transfer motion from reference videos to animate still images",
+    "pricing": "$0.21\u2013$0.63+ per video",
+    "source": "https://docs.runpod.io/public-endpoints/models/kling-v2-6-motion-control",
+    "checked": "2026-10-11",
+    "fields": [
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the character image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "video",
+        "label": "Reference video (1\u20139 seconds)",
+        "type": "string",
+        "required": true,
+        "description": "URL of the reference video containing the motion to transfer.",
+        "media": "video"
+      },
+      {
+        "name": "character_orientation",
+        "label": "Character orientation",
+        "type": "string",
+        "required": true,
+        "description": "Source of character orientation. Options: video, image.",
+        "choices": [
+          "video",
+          "image"
+        ],
+        "default": "video"
+      },
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": false,
+        "description": "Text description of the desired motion."
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated video."
+      },
+      {
+        "name": "keep_original_sound",
+        "label": "Keep original sound",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether to preserve audio from the reference video.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "kling-video-o1-r2v",
+    "name": "Kling Video O1 R2V",
+    "kind": "video",
+    "workflows": [
+      "reference-to-video"
+    ],
+    "description": "Creative video generation using character, prop, or scene references from multiple viewpoints",
+    "pricing": "$0.112 per second",
+    "source": "https://docs.runpod.io/public-endpoints/models/kling-video-o1-r2v",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video action."
+      },
+      {
+        "name": "images",
+        "label": "Reference images",
+        "type": "array",
+        "required": true,
+        "description": "Array of 1-10 reference image URLs.",
+        "media": "image",
+        "maxItems": 10
+      },
+      {
+        "name": "video",
+        "label": "Reference video",
+        "type": "string",
+        "required": false,
+        "description": "Optional reference video URL.",
+        "media": "video"
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated video."
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Aspect ratio. Options: 16:9, 9:16, 1:1.",
+        "default": "16:9",
+        "choices": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ]
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds. Options: 3-10 seconds.",
+        "default": 5,
+        "min": 3,
+        "max": 10
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_prompt_expansion",
+        "label": "Enable prompt expansion",
+        "type": "boolean",
+        "required": false,
+        "description": "Automatically expand and enhance the prompt.",
+        "default": false
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "google-nano-banana-2-edit",
+    "name": "Nano Banana 2 Edit",
+    "kind": "image",
+    "workflows": [
+      "image-to-image"
+    ],
+    "description": "Google's latest multi-image editing model with resolution options up to 4K",
+    "pricing": "$0.0875 (1K), $0.13 (2K), $0.175 (4K)",
+    "source": "https://docs.runpod.io/public-endpoints/models/nano-banana-2-edit",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "images",
+        "label": "Reference images",
+        "type": "array",
+        "required": true,
+        "description": "Array of reference image URLs to edit or combine. Supports up to 14 images, but 1-3 images is recommended for best stability.",
+        "media": "image",
+        "maxItems": 14
+      },
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired edit or how to combine the images."
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Output resolution. Options: 1k, 2k, 4k.",
+        "default": "1k",
+        "choices": [
+          "1k",
+          "2k",
+          "4k"
+        ]
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Output aspect ratio (e.g., 1:1, 3:2, 16:9, 9:16, 4:5)."
+      },
+      {
+        "name": "output_format",
+        "label": "Output format",
+        "type": "string",
+        "required": false,
+        "description": "Output format. Options: png, jpeg.",
+        "default": "png",
+        "choices": [
+          "png",
+          "jpeg"
+        ]
+      },
+      {
+        "name": "enable_base64_output",
+        "label": "Enable base64 output",
+        "type": "boolean",
+        "required": false,
+        "description": "Return result as base64 string instead of URL.",
+        "default": false,
+        "hidden": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "nano-banana-pro-edit",
+    "name": "Nano Banana Pro Edit",
+    "kind": "image",
+    "workflows": [
+      "image-to-image"
+    ],
+    "description": "Google's advanced image editing model with support for up to 14 reference images and multiple resolutions.",
+    "pricing": "$0.14\u2013$0.24 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/nano-banana-pro-edit",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Editing instructions describing the desired transformation or how to combine the images."
+      },
+      {
+        "name": "images",
+        "label": "Reference images",
+        "type": "array",
+        "required": true,
+        "description": "Array of image URLs to edit or combine. Supports up to 14 images.",
+        "media": "image",
+        "maxItems": 14
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Output resolution. Options: 1k, 2k, 4k.",
+        "default": "2k",
+        "choices": [
+          "1k",
+          "2k",
+          "4k"
+        ]
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Output aspect ratio. Options: 1:1, 3:2, 2:3, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9.",
+        "default": "1:1",
+        "choices": [
+          "1:1",
+          "3:2",
+          "2:3",
+          "4:3",
+          "4:5",
+          "5:4",
+          "9:16",
+          "16:9",
+          "21:9"
+        ]
+      },
+      {
+        "name": "output_format",
+        "label": "Output format",
+        "type": "string",
+        "required": false,
+        "description": "Output image format. Options: png, jpeg.",
+        "default": "png",
+        "choices": [
+          "png",
+          "jpeg"
+        ]
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "p-image-edit",
+    "name": "P-Image Edit",
+    "kind": "image",
+    "workflows": [
+      "image-to-image"
+    ],
+    "description": "Premium image editing with complex compositions, style transfers, and targeted edits",
+    "pricing": "$0.01 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/p-image-edit",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text instructions for editing the image."
+      },
+      {
+        "name": "images",
+        "label": "Reference images",
+        "type": "array",
+        "required": true,
+        "description": "Array of 1-5 image URLs for batch processing.",
+        "media": "image",
+        "maxItems": 5
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Output aspect ratio. Options: match_input_image, 1:1, 16:9, 9:16, 4:3, 3:4, 3:2, 2:3.",
+        "default": "match_input_image",
+        "choices": [
+          "match_input_image",
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3"
+        ]
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "disable_safety_checker",
+        "label": "Disable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Disable content safety filtering.",
+        "default": false
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "p-image-t2i",
+    "name": "P-Image T2I",
+    "kind": "image",
+    "workflows": [
+      "text-to-image"
+    ],
+    "description": "Ultra-fast text-to-image with automatic prompt enhancement and 2-stage refinement",
+    "pricing": "$0.005 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/p-image-t2i",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired image."
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Output aspect ratio. Options: 1:1, 16:9, 9:16, 4:3, 3:4, 3:2, 2:3.",
+        "default": "16:9",
+        "choices": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3"
+        ]
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results.",
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "disable_safety_checker",
+        "label": "Disable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Disable content safety filtering.",
+        "default": false
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "p-video",
+    "name": "Pruna Video",
+    "kind": "video",
+    "workflows": [
+      "text-to-video",
+      "image-to-video",
+      "audio-to-video"
+    ],
+    "description": "Premium AI video generation from text, images, and audio with fast generation times",
+    "pricing": "$0.02/s (720p), $0.04/s (1080p)",
+    "source": "https://docs.runpod.io/public-endpoints/models/p-video",
+    "checked": "2026-10-11",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video content."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": false,
+        "description": "URL of an input image for image-to-video generation. Supports jpg, jpeg, png, webp. When provided, aspect_ratio is ignored.",
+        "media": "image"
+      },
+      {
+        "name": "audio",
+        "label": "Audio track",
+        "type": "string",
+        "required": false,
+        "description": "URL of an audio file for audio-conditioned generation. Supports flac, mp3, wav. When provided, duration is ignored and the video matches audio length.",
+        "media": "audio"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds (1-10). Ignored when audio is provided.",
+        "default": 5,
+        "min": 1.0,
+        "max": 10.0
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Video resolution. Options: 720p, 1080p.",
+        "default": "720p",
+        "choices": [
+          "720p",
+          "1080p"
+        ]
+      },
+      {
+        "name": "fps",
+        "label": "Fps",
+        "type": "integer",
+        "required": false,
+        "description": "Frames per second. Options: 24, 48.",
+        "default": 24,
+        "choices": [
+          24,
+          48
+        ]
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Output aspect ratio. Options: 16:9, 9:16, 4:3, 3:4, 3:2, 2:3, 1:1. Ignored when image is provided.",
+        "default": "16:9",
+        "choices": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "1:1"
+        ]
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible generation.",
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "draft",
+        "label": "Draft",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable draft mode for faster, lower-quality preview. Reduces cost by 75%.",
+        "default": false
+      },
+      {
+        "name": "save_audio",
+        "label": "Save audio",
+        "type": "boolean",
+        "required": false,
+        "description": "Include audio in the output video.",
+        "default": true
+      },
+      {
+        "name": "prompt_upsampling",
+        "label": "Prompt upsampling",
+        "type": "boolean",
+        "required": false,
+        "description": "Automatically enhance the prompt for better results.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "qwen-image-edit-2511-lora",
+    "name": "Qwen Image Edit 2511 LoRA",
+    "kind": "image",
+    "workflows": [
+      "image-to-image"
+    ],
+    "description": "Advanced image editing with complex text rendering and LoRA support",
+    "pricing": "$0.025 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/qwen-image-edit-2511-lora",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text instructions describing the desired edits."
+      },
+      {
+        "name": "images",
+        "label": "Reference images",
+        "type": "array",
+        "required": true,
+        "description": "Array of 1-3 image URLs to edit.",
+        "media": "image",
+        "maxItems": 3
+      },
+      {
+        "name": "loras",
+        "label": "Custom styles (LoRA)",
+        "type": "array",
+        "required": false,
+        "description": "Array of LoRA configurations to apply."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Output dimensions. Options: 1024*1024, 1024*1280, 1280*1024, 1280*1280, 1280*1536, 1536*1080.",
+        "default": "1024*1024",
+        "choices": [
+          "1024*1024",
+          "1024*1280",
+          "1280*1024",
+          "1280*1280",
+          "1280*1536",
+          "1536*1080"
+        ]
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "output_format",
+        "label": "Output format",
+        "type": "string",
+        "required": false,
+        "description": "Output format. Options: jpeg, png, webp.",
+        "default": "jpeg",
+        "choices": [
+          "jpeg",
+          "png",
+          "webp"
+        ]
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "qwen-image-edit-2511",
+    "name": "Qwen Image Edit 2511",
+    "kind": "image",
+    "workflows": [
+      "image-to-image"
+    ],
+    "description": "Advanced image editing with strong consistency and multi-person identity preservation",
+    "pricing": "$0.02 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/qwen-image-edit-2511",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text instructions describing the desired edits."
+      },
+      {
+        "name": "images",
+        "label": "Reference images",
+        "type": "array",
+        "required": true,
+        "description": "Array of 1-3 image URLs to edit.",
+        "media": "image",
+        "maxItems": 3
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Output dimensions. Options: 1024*1024, 1024*1280, 1280*1024, 1280*1280, 1280*1536, 1536*1080.",
+        "default": "1024*1024",
+        "choices": [
+          "1024*1024",
+          "1024*1280",
+          "1280*1024",
+          "1280*1280",
+          "1280*1536",
+          "1536*1080"
+        ]
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "output_format",
+        "label": "Output format",
+        "type": "string",
+        "required": false,
+        "description": "Output format. Options: jpeg, png, webp.",
+        "default": "jpeg",
+        "choices": [
+          "jpeg",
+          "png",
+          "webp"
+        ]
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "qwen-image-edit",
+    "name": "Qwen Image Edit",
+    "kind": "image",
+    "workflows": [
+      "image-to-image"
+    ],
+    "description": "Image editing with unique text rendering capabilities",
+    "pricing": "$0.02 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/qwen-image-edit",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Editing instructions describing the desired changes."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the image to edit.",
+        "media": "image"
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the edited image."
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "output_format",
+        "label": "Output format",
+        "type": "string",
+        "required": false,
+        "description": "Output format. Accepts png or jpeg.",
+        "default": "jpeg",
+        "choices": [
+          "png",
+          "jpeg"
+        ]
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "qwen-image-t2i-lora",
+    "name": "Qwen Image LoRA",
+    "kind": "image",
+    "workflows": [
+      "text-to-image"
+    ],
+    "description": "Image generation with LoRA support and advanced text rendering",
+    "pricing": "$0.025 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/qwen-image-lora",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired image."
+      },
+      {
+        "name": "loras",
+        "label": "Custom styles (LoRA)",
+        "type": "array",
+        "required": false,
+        "description": "Array of LoRA configurations to apply."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Image dimensions in format \"width*height\".",
+        "default": "1024*1024"
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "qwen-image-t2i",
+    "name": "Qwen Image",
+    "kind": "image",
+    "workflows": [
+      "text-to-image"
+    ],
+    "description": "Image generation foundation model with advanced text rendering capabilities",
+    "pricing": "$0.02 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/qwen-image",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired image."
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated image."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Image dimensions in format \"width*height\".",
+        "default": "1024*1024"
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "seedance-v1-5-pro-i2v",
+    "name": "Seedance 1.5 Pro I2V",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Cinematic image-to-video with expressive motion and stable aesthetics",
+    "pricing": "$0.024\u2013$0.052 per second",
+    "source": "https://docs.runpod.io/public-endpoints/models/seedance-1-5-pro",
+    "checked": "2026-10-17",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video motion and content."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the source image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "last_image",
+        "label": "Ending frame",
+        "type": "string",
+        "required": false,
+        "description": "URL of an optional ending frame image.",
+        "media": "image"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds. Range: 4-12 seconds.",
+        "default": 5,
+        "min": 4.0,
+        "max": 12.0
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Output resolution. Options: 480p, 720p.",
+        "default": "720p",
+        "choices": [
+          "480p",
+          "720p"
+        ]
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Aspect ratio. Options: 21:9, 16:9, 9:16, 1:1, 4:3, 3:4.",
+        "default": "16:9",
+        "choices": [
+          "21:9",
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ]
+      },
+      {
+        "name": "camera_fixed",
+        "label": "Camera fixed",
+        "type": "boolean",
+        "required": false,
+        "description": "Keep camera position fixed during video.",
+        "default": false
+      },
+      {
+        "name": "generate_audio",
+        "label": "Generate audio",
+        "type": "boolean",
+        "required": false,
+        "description": "Generate accompanying audio.",
+        "default": false
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      }
+    ],
+    "messages": false,
+    "notice": "Retiring soon. Try Seedance 2.5 I2V."
+  },
+  {
+    "id": "seedream-v4-edit",
+    "name": "Seedream 4.0 Edit",
+    "kind": "image",
+    "workflows": [
+      "image-to-image"
+    ],
+    "description": "New-generation image editing with unified generation and editing architecture",
+    "pricing": "$0.027 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/seedream-4-edit",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Editing instructions describing the desired transformation."
+      },
+      {
+        "name": "images",
+        "label": "Reference images",
+        "type": "array",
+        "required": true,
+        "description": "Array of image URLs to edit or combine.",
+        "media": "image",
+        "maxItems": 14
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Output image dimensions in format \"width*height\".",
+        "default": "1024*1024"
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "seedream-v4-t2i",
+    "name": "Seedream 4.0 T2I",
+    "kind": "image",
+    "workflows": [
+      "text-to-image"
+    ],
+    "description": "New-generation image creation with unified generation and editing architecture",
+    "pricing": "$0.027 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/seedream-4-t2i",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired image."
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated image."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Image dimensions in format \"width*height\".",
+        "default": "1024*1024"
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "sora-2-pro-i2v",
+    "name": "SORA 2 Pro I2V",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "OpenAI's Sora 2 Pro professional-grade video and audio generation model",
+    "pricing": "$1.20\u2013$6.00 per video",
+    "source": "https://docs.runpod.io/public-endpoints/models/sora-2-pro",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video, including action, ambient sound, and character dialogue."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the source image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Output video resolution.",
+        "default": "720p",
+        "choices": [
+          "720p",
+          "1080p"
+        ]
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": true,
+        "description": "Video duration in seconds. Valid options: 4, 8, or 12.",
+        "choices": [
+          4,
+          8,
+          12
+        ],
+        "default": 4
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "sora-2-i2v",
+    "name": "SORA 2 I2V",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "OpenAI's Sora 2 video and audio generation model",
+    "pricing": "$0.40\u2013$1.20 per video",
+    "source": "https://docs.runpod.io/public-endpoints/models/sora-2",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video, including action, ambient sound, and character dialogue."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the source image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": true,
+        "description": "Video duration in seconds. Valid options: 4, 8, or 12.",
+        "choices": [
+          4,
+          8,
+          12
+        ],
+        "default": 4
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "vidu-q3-i2v",
+    "name": "Vidu Q3 I2V",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Animate reference images into videos with text-driven motion and optional audio generation",
+    "pricing": "$0.15 per second",
+    "source": "https://docs.runpod.io/public-endpoints/models/vidu-q3-i2v",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the reference image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired motion and action."
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Output video resolution. Options: 540p, 720p, 1080p.",
+        "default": "720p",
+        "choices": [
+          "540p",
+          "720p",
+          "1080p"
+        ]
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video length in seconds (1-16).",
+        "default": 5,
+        "min": 1.0,
+        "max": 16.0
+      },
+      {
+        "name": "movement_amplitude",
+        "label": "Movement amplitude",
+        "type": "string",
+        "required": false,
+        "description": "Motion intensity control. Options: auto, small, medium, large.",
+        "default": "auto",
+        "choices": [
+          "auto",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      {
+        "name": "generate_audio",
+        "label": "Generate audio",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable synchronized audio generation.",
+        "default": true
+      },
+      {
+        "name": "bgm",
+        "label": "Bgm",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable background music.",
+        "default": true
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Random seed for reproducibility. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "vidu-q3-t2v",
+    "name": "Vidu Q3 T2V",
+    "kind": "video",
+    "workflows": [
+      "text-to-video"
+    ],
+    "description": "Generate high-quality videos from text descriptions with multiple resolutions and audio support",
+    "pricing": "$0.15 per second",
+    "source": "https://docs.runpod.io/public-endpoints/models/vidu-q3-t2v",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the video scene and action."
+      },
+      {
+        "name": "style",
+        "label": "Style",
+        "type": "string",
+        "required": false,
+        "description": "Visual aesthetic style. Options: general, anime.",
+        "default": "general",
+        "choices": [
+          "general",
+          "anime"
+        ]
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Output video resolution. Options: 540p, 720p, 1080p.",
+        "default": "720p",
+        "choices": [
+          "540p",
+          "720p",
+          "1080p"
+        ]
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video length in seconds (1-16).",
+        "default": 5,
+        "min": 1.0,
+        "max": 16.0
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Output aspect ratio. Options: 16:9, 9:16, 4:3, 3:4, 1:1.",
+        "default": "4:3",
+        "choices": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "1:1"
+        ]
+      },
+      {
+        "name": "movement_amplitude",
+        "label": "Movement amplitude",
+        "type": "string",
+        "required": false,
+        "description": "Motion intensity control. Options: auto, small, medium, large.",
+        "default": "auto",
+        "choices": [
+          "auto",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      {
+        "name": "generate_audio",
+        "label": "Generate audio",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable synchronized audio generation.",
+        "default": true
+      },
+      {
+        "name": "bgm",
+        "label": "Bgm",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable background music.",
+        "default": true
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Random seed for reproducibility. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "wan-2-1-i2v-720",
+    "name": "WAN 2.1 I2V 720p",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Open-source image-to-video generation that converts static images into 720p videos",
+    "pricing": "$0.30 per 5 seconds of video",
+    "source": "https://docs.runpod.io/public-endpoints/models/wan-2-1-i2v",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video motion and content."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the input image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated video."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Video resolution in format \"width*height\".",
+        "default": "1280*720"
+      },
+      {
+        "name": "num_inference_steps",
+        "label": "Detail steps",
+        "type": "integer",
+        "required": false,
+        "description": "Number of denoising steps. Range: 1-50.",
+        "default": 30,
+        "min": 1.0,
+        "max": 50.0
+      },
+      {
+        "name": "guidance",
+        "label": "Follow the prompt",
+        "type": "float",
+        "required": false,
+        "description": "How closely to follow the prompt. Range: 0.0-10.0.",
+        "default": 5.0,
+        "min": 0.0,
+        "max": 10.0
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "min": 1,
+        "max": 15
+      },
+      {
+        "name": "flow_shift",
+        "label": "Flow shift",
+        "type": "integer",
+        "required": false,
+        "description": "Controls the motion flow in the generated video.",
+        "default": 5
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_prompt_optimization",
+        "label": "Enable prompt optimization",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether to automatically optimize the prompt.",
+        "default": false
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether to run safety checks on the output.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "wan-2-2-t2v-720-lora",
+    "name": "WAN 2.2 I2V 720p LoRA",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Open-source video generation with LoRA support for customized camera movements",
+    "pricing": "$0.35\u2013$0.56 per video",
+    "source": "https://docs.runpod.io/public-endpoints/models/wan-2-2-i2v-lora",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video motion."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the source image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "high_noise_loras",
+        "label": "Motion styles (high noise)",
+        "type": "array",
+        "required": false,
+        "description": "LoRA configurations for high-noise denoising stages."
+      },
+      {
+        "name": "low_noise_loras",
+        "label": "Detail styles (low noise)",
+        "type": "array",
+        "required": false,
+        "description": "LoRA configurations for low-noise denoising stages."
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "min": 1,
+        "max": 15
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "wan-2-2-i2v-720",
+    "name": "WAN 2.2 I2V 720p",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Open-source image-to-video generation using diffusion transformer architecture",
+    "pricing": "$0.30\u2013$0.90 per video",
+    "source": "https://docs.runpod.io/public-endpoints/models/wan-2-2-i2v",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video motion and content."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the input image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated video."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Video resolution in format \"width*height\".",
+        "default": "1280*720"
+      },
+      {
+        "name": "num_inference_steps",
+        "label": "Detail steps",
+        "type": "integer",
+        "required": false,
+        "description": "Number of denoising steps. Range: 1-50.",
+        "default": 30,
+        "min": 1.0,
+        "max": 50.0
+      },
+      {
+        "name": "guidance",
+        "label": "Follow the prompt",
+        "type": "float",
+        "required": false,
+        "description": "How closely to follow the prompt. Range: 0.0-10.0.",
+        "default": 5.0,
+        "min": 0.0,
+        "max": 10.0
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "min": 1,
+        "max": 15
+      },
+      {
+        "name": "flow_shift",
+        "label": "Flow shift",
+        "type": "integer",
+        "required": false,
+        "description": "Controls the motion flow in the generated video.",
+        "default": 5
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_prompt_optimization",
+        "label": "Enable prompt optimization",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether to automatically optimize the prompt.",
+        "default": false
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether to run safety checks on the output.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "wan-2-5",
+    "name": "WAN 2.5",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Image-to-video generation model with prompt expansion support",
+    "pricing": "$0.25\u2013$1.50 per video",
+    "source": "https://docs.runpod.io/public-endpoints/models/wan-2-5",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the source image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the video."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Video dimensions in format \"width*height\".",
+        "default": "1280*720"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "min": 1,
+        "max": 15
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_prompt_expansion",
+        "label": "Enable prompt expansion",
+        "type": "boolean",
+        "required": false,
+        "description": "Automatically expand and enhance the prompt.",
+        "default": false
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "wan-2-6-i2v",
+    "name": "WAN 2.6 I2V",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Image-to-video generation with audio support and resolutions up to 1080p",
+    "pricing": "$0.10/s (720p), $0.15/s (1080p)",
+    "source": "https://docs.runpod.io/public-endpoints/models/wan-2-6-i2v",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video motion and content."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the source image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "audio",
+        "label": "Audio track",
+        "type": "string",
+        "required": false,
+        "description": "URL of an audio file to include in the video.",
+        "media": "audio"
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated video."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Video resolution. Options: 1280*720, 1920*1080.",
+        "default": "1280*720",
+        "choices": [
+          "1280*720",
+          "1920*1080"
+        ]
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds. Options: 5, 10, 15.",
+        "default": 5,
+        "choices": [
+          5,
+          10,
+          15
+        ]
+      },
+      {
+        "name": "shot_type",
+        "label": "Shot type",
+        "type": "string",
+        "required": false,
+        "description": "Shot composition mode. Options: single, multi.",
+        "default": "single",
+        "choices": [
+          "single",
+          "multi"
+        ]
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_prompt_expansion",
+        "label": "Enable prompt expansion",
+        "type": "boolean",
+        "required": false,
+        "description": "Automatically expand and enhance the prompt.",
+        "default": false
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "wan-2-6-t2i",
+    "name": "WAN 2.6 T2I",
+    "kind": "image",
+    "workflows": [
+      "text-to-image"
+    ],
+    "description": "High-quality text-to-image with strong prompt adherence and clean composition",
+    "pricing": "$0.03 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/wan-2-6-t2i",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired image."
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Image dimensions. Options: 1024*1024, 1024*768, 1440*1024.",
+        "default": "1024*1024",
+        "choices": [
+          "1024*1024",
+          "1024*768",
+          "1440*1024"
+        ]
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "wan-2-6-t2v",
+    "name": "WAN 2.6 T2V",
+    "kind": "video",
+    "workflows": [
+      "text-to-video"
+    ],
+    "description": "Text-to-video with cinematic quality, stable motion, and strong instruction-following",
+    "pricing": "$0.50\u2013$2.25 per video",
+    "source": "https://docs.runpod.io/public-endpoints/models/wan-2-6-t2v",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video content."
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Elements to exclude from the generated video."
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds. Options: 5, 10, 15.",
+        "default": 5,
+        "choices": [
+          5,
+          10,
+          15
+        ]
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Video resolution. Options: 1280*720, 1920*1080, 720*1280, 1080*1920.",
+        "default": "1280*720",
+        "choices": [
+          "1280*720",
+          "1920*1080",
+          "720*1280",
+          "1080*1920"
+        ]
+      },
+      {
+        "name": "shot_type",
+        "label": "Shot type",
+        "type": "string",
+        "required": false,
+        "description": "Shot composition. Options: single, multi.",
+        "default": "single",
+        "choices": [
+          "single",
+          "multi"
+        ]
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "enable_prompt_expansion",
+        "label": "Enable prompt expansion",
+        "type": "boolean",
+        "required": false,
+        "description": "Automatically expand and enhance the prompt.",
+        "default": false
+      },
+      {
+        "name": "audio",
+        "label": "Audio track",
+        "type": "string",
+        "required": false,
+        "description": "Optional audio URL to include in the video.",
+        "media": "audio"
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "z-image-turbo",
+    "name": "Z-Image Turbo",
+    "kind": "image",
+    "workflows": [
+      "text-to-image",
+      "image-to-image"
+    ],
+    "description": "A 6-billion-parameter image generation model with text-to-image and image-to-image support",
+    "pricing": "$0.005 per image",
+    "source": "https://docs.runpod.io/public-endpoints/models/z-image-turbo",
+    "checked": "2026-09-07",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired image. Supports English and Chinese."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": false,
+        "description": "URL of an input image for image-to-image generation.",
+        "media": "image"
+      },
+      {
+        "name": "size",
+        "label": "Output size",
+        "type": "string",
+        "required": false,
+        "description": "Image dimensions. Options: 512*512, 768*768, 1024*1024, 1280*1280, 1024*768, 768*1024, 1280*720, 720*1280.",
+        "default": "1024*1024",
+        "choices": [
+          "512*512",
+          "768*768",
+          "1024*1024",
+          "1280*1280",
+          "1024*768",
+          "768*1024",
+          "1280*720",
+          "720*1280"
+        ]
+      },
+      {
+        "name": "strength",
+        "label": "How much to change",
+        "type": "number",
+        "required": false,
+        "description": "Strength of modifications for image-to-image. Range: 0.0-1.0.",
+        "default": 0.8,
+        "min": 0.0,
+        "max": 1.0
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "output_format",
+        "label": "Output format",
+        "type": "string",
+        "required": false,
+        "description": "Output format. Options: png, jpeg, webp.",
+        "default": "png",
+        "choices": [
+          "png",
+          "jpeg",
+          "webp"
+        ]
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Enable safety checker",
+        "type": "boolean",
+        "required": false,
+        "description": "Enable content safety checking.",
+        "default": true
+      }
+    ],
+    "messages": false
+  },
+  {
+    "id": "google-veo3-1-fast-i2v",
+    "name": "Veo 3.1 Fast",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Animate a reference image with optional synchronized audio.",
+    "pricing": "$0.15/sec with audio; $0.10/sec without audio",
+    "source": "https://console.runpod.io/hub/playground/video/google-veo3-1-fast-i2v",
+    "checked": "2026-09-07",
+    "messages": false,
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Describe the result you want."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "Starting image",
+        "media": "image"
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Things to avoid",
+        "type": "string",
+        "required": false,
+        "description": "Things to avoid"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Duration (seconds)",
+        "choices": [
+          4,
+          6,
+          8
+        ],
+        "default": 6
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Format",
+        "type": "string",
+        "required": false,
+        "description": "Format",
+        "choices": [
+          "16:9",
+          "9:16"
+        ],
+        "default": "16:9"
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Resolution",
+        "choices": [
+          "720p"
+        ],
+        "default": "720p"
+      },
+      {
+        "name": "generate_audio",
+        "label": "Generate audio",
+        "type": "boolean",
+        "required": false,
+        "description": "Generate audio",
+        "default": true
+      },
+      {
+        "name": "last_image",
+        "label": "Ending frame",
+        "type": "string",
+        "required": false,
+        "description": "Ending frame",
+        "media": "image"
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "id": "minimax-hailuo-2-3-fast",
+    "name": "Hailuo 2.3 Fast",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Animate an image with fast, expressive motion.",
+    "pricing": "$0.19/sec",
+    "source": "https://console.runpod.io/hub/playground/video/minimax-hailuo-2-3-fast",
+    "checked": "2026-09-07",
+    "messages": false,
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Describe the result you want."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "Starting image",
+        "media": "image"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Duration (seconds)",
+        "choices": [
+          6,
+          10
+        ],
+        "default": 6
+      },
+      {
+        "name": "enable_prompt_expansion",
+        "label": "Enhance description",
+        "type": "boolean",
+        "required": false,
+        "description": "Enhance description",
+        "default": true
+      },
+      {
+        "name": "go_fast",
+        "label": "Prioritize speed",
+        "type": "boolean",
+        "required": false,
+        "description": "Prioritize speed",
+        "default": true
+      }
+    ]
+  },
+  {
+    "id": "minimax-hailuo-02-std",
+    "name": "Hailuo 02 Standard",
+    "kind": "video",
+    "workflows": [
+      "text-to-video",
+      "image-to-video"
+    ],
+    "description": "Generate a clip from text or animate between reference frames.",
+    "pricing": "$0.0383/sec",
+    "source": "https://console.runpod.io/hub/playground/video/minimax-hailuo-02-std",
+    "checked": "2026-09-07",
+    "messages": false,
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Describe the result you want."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": false,
+        "description": "Starting image",
+        "media": "image"
+      },
+      {
+        "name": "end_image",
+        "label": "Ending frame",
+        "type": "string",
+        "required": false,
+        "description": "Ending frame",
+        "media": "image"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Duration (seconds)",
+        "choices": [
+          6,
+          10
+        ],
+        "default": 6
+      },
+      {
+        "name": "enable_prompt_expansion",
+        "label": "Enhance description",
+        "type": "boolean",
+        "required": false,
+        "description": "Enhance description",
+        "default": true
+      }
+    ]
+  },
+  {
+    "id": "p-video-edit",
+    "name": "Pruna Video Edit",
+    "kind": "video",
+    "workflows": [
+      "video-to-video"
+    ],
+    "description": "Edit a video up to 15 seconds long, with optional image references.",
+    "pricing": "$0.045/s standard, $0.025/s draft",
+    "source": "https://console.runpod.io/hub/playground/video/p-video-edit",
+    "checked": "2026-10-11",
+    "messages": false,
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Describe the result you want."
+      },
+      {
+        "name": "video",
+        "label": "Source video (up to 15 seconds)",
+        "type": "string",
+        "required": true,
+        "description": "Source video (up to 15 seconds)",
+        "media": "video"
+      },
+      {
+        "name": "images",
+        "label": "Reference images",
+        "type": "array",
+        "required": false,
+        "description": "Reference images",
+        "media": "image",
+        "maxItems": 4
+      },
+      {
+        "name": "prompt_upsampling",
+        "label": "Enhance description",
+        "type": "boolean",
+        "required": false,
+        "description": "Enhance description",
+        "default": true
+      },
+      {
+        "name": "draft",
+        "label": "Draft preview",
+        "type": "boolean",
+        "required": false,
+        "description": "Draft preview",
+        "default": false
+      },
+      {
+        "name": "save_audio",
+        "label": "Keep audio",
+        "type": "boolean",
+        "required": false,
+        "description": "Keep audio",
+        "default": true
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "id": "fal-kling-v3-pro-i2v",
+    "provider": "fal",
+    "endpoint": "fal-ai/kling-video/v3/pro/image-to-video",
+    "name": "Kling 3.0 Pro",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Animate a starting image with optional native audio and an ending frame.",
+    "pricing": "$0.112/second without audio; $0.168/second with audio.",
+    "source": "https://fal.ai/models/fal-ai/kling-video/v3/pro/image-to-video",
+    "checked": "2026-10-12",
+    "messages": false,
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Describe the motion",
+        "type": "string",
+        "description": "",
+        "required": true,
+        "maxLength": 2500
+      },
+      {
+        "name": "start_image_url",
+        "label": "Starting image",
+        "type": "string",
+        "description": "",
+        "media": "image",
+        "required": true
+      },
+      {
+        "name": "end_image_url",
+        "label": "Ending image",
+        "type": "string",
+        "description": "",
+        "media": "image"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "description": "",
+        "default": 5,
+        "min": 3,
+        "max": 15
+      },
+      {
+        "name": "generate_audio",
+        "label": "Generate audio",
+        "type": "boolean",
+        "description": "",
+        "default": false
+      },
+      {
+        "name": "negative_prompt",
+        "label": "Avoid",
+        "type": "string",
+        "description": "",
+        "default": "blur, distort, and low quality",
+        "maxLength": 2500
+      },
+      {
+        "name": "cfg_scale",
+        "label": "Prompt adherence",
+        "type": "number",
+        "description": "",
+        "default": 0.5,
+        "min": 0,
+        "max": 1
+      }
+    ]
+  },
+  {
+    "id": "fal-flux-2-klein-9b",
+    "provider": "fal",
+    "endpoint": "fal-ai/flux-2/klein/9b",
+    "name": "FLUX.2 Klein 9B",
+    "kind": "image",
+    "workflows": [
+      "text-to-image"
+    ],
+    "description": "Fast image generation with FLUX.2 Klein 9B.",
+    "pricing": "$0.006 per megapixel.",
+    "source": "https://fal.ai/models/fal-ai/flux-2/klein/9b",
+    "checked": "2026-10-12",
+    "messages": false,
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Describe your idea",
+        "type": "string",
+        "description": "",
+        "required": true
+      },
+      {
+        "name": "width",
+        "label": "Width",
+        "type": "integer",
+        "description": "",
+        "default": 1024,
+        "min": 512,
+        "max": 2048,
+        "step": 32
+      },
+      {
+        "name": "height",
+        "label": "Height",
+        "type": "integer",
+        "description": "",
+        "default": 1024,
+        "min": 512,
+        "max": 2048,
+        "step": 32
+      },
+      {
+        "name": "num_inference_steps",
+        "label": "Detail steps",
+        "type": "integer",
+        "description": "",
+        "default": 4,
+        "min": 4,
+        "max": 8
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "description": "",
+        "min": 0,
+        "max": 2147483647
+      },
+      {
+        "name": "output_format",
+        "label": "Output format",
+        "type": "string",
+        "description": "",
+        "default": "png",
+        "choices": [
+          "png",
+          "jpeg",
+          "webp"
+        ]
+      },
+      {
+        "name": "enable_safety_checker",
+        "label": "Content safety checking",
+        "type": "boolean",
+        "description": "",
+        "default": true
+      }
+    ]
+  },
+  {
+    "id": "seedance-2-5-i2v",
+    "name": "Seedance 2.5 I2V",
+    "kind": "video",
+    "workflows": [
+      "image-to-video"
+    ],
+    "description": "Create 4\u201330-second videos up to 4K with optional native audio.",
+    "pricing": "$0.18\u2013$1.80 per second",
+    "source": "https://docs.runpod.io/public-endpoints/models/seedance-2-5-i2v",
+    "checked": "2026-10-17",
+    "messages": false,
+    "endpoint": "16jsvx5ncmm24x",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video motion and content."
+      },
+      {
+        "name": "image",
+        "label": "Starting image",
+        "type": "string",
+        "required": true,
+        "description": "URL of the source image to animate.",
+        "media": "image"
+      },
+      {
+        "name": "last_image",
+        "label": "Ending frame",
+        "type": "string",
+        "required": false,
+        "description": "URL of an optional ending frame image.",
+        "media": "image"
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds, from 4 to 30.",
+        "default": 5,
+        "min": 4.0,
+        "max": 30
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Output resolution: 480p, 720p, 1080p, or 4K.",
+        "default": "720p",
+        "choices": [
+          "480p",
+          "720p",
+          "1080p",
+          "4k"
+        ]
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Aspect ratio. Options: 21:9, 16:9, 9:16, 1:1, 4:3, 3:4.",
+        "default": "16:9",
+        "choices": [
+          "21:9",
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ]
+      },
+      {
+        "name": "generate_audio",
+        "label": "Generate audio",
+        "type": "boolean",
+        "required": false,
+        "description": "Generate accompanying audio.",
+        "default": true
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      }
+    ]
+  },
+  {
+    "id": "seedance-2-5-t2v",
+    "name": "Seedance 2.5 T2V",
+    "kind": "video",
+    "workflows": [
+      "text-to-video"
+    ],
+    "description": "Create 4\u201330-second videos up to 4K with optional native audio.",
+    "pricing": "$0.18\u2013$1.80 per second",
+    "source": "https://docs.runpod.io/public-endpoints/models/seedance-2-5-t2v",
+    "checked": "2026-10-17",
+    "messages": false,
+    "endpoint": "tdq07exynr7zux",
+    "fields": [
+      {
+        "name": "prompt",
+        "label": "Prompt",
+        "type": "string",
+        "required": true,
+        "description": "Text description of the desired video motion and content."
+      },
+      {
+        "name": "duration",
+        "label": "Duration (seconds)",
+        "type": "integer",
+        "required": false,
+        "description": "Video duration in seconds, from 4 to 30.",
+        "default": 5,
+        "min": 4.0,
+        "max": 30
+      },
+      {
+        "name": "resolution",
+        "label": "Resolution",
+        "type": "string",
+        "required": false,
+        "description": "Output resolution: 480p, 720p, 1080p, or 4K.",
+        "default": "720p",
+        "choices": [
+          "480p",
+          "720p",
+          "1080p",
+          "4k"
+        ]
+      },
+      {
+        "name": "aspect_ratio",
+        "label": "Aspect ratio",
+        "type": "string",
+        "required": false,
+        "description": "Aspect ratio. Options: 21:9, 16:9, 9:16, 1:1, 4:3, 3:4.",
+        "default": "16:9",
+        "choices": [
+          "21:9",
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ]
+      },
+      {
+        "name": "generate_audio",
+        "label": "Generate audio",
+        "type": "boolean",
+        "required": false,
+        "description": "Generate accompanying audio.",
+        "default": true
+      },
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "integer",
+        "required": false,
+        "description": "Seed for reproducible results. Set to -1 for random.",
+        "default": -1,
+        "min": -1,
+        "max": 2147483647
+      },
+      {
+        "name": "reference_images",
+        "label": "Reference image",
+        "type": "array",
+        "required": false,
+        "description": "Optional image reference. Forma currently accepts one file of this type.",
+        "media": "image",
+        "maxItems": 1
+      },
+      {
+        "name": "reference_videos",
+        "label": "Reference video",
+        "type": "array",
+        "required": false,
+        "description": "Optional video reference. Forma currently accepts one file of this type.",
+        "media": "video",
+        "maxItems": 1
+      },
+      {
+        "name": "reference_audio",
+        "label": "Reference audio",
+        "type": "array",
+        "required": false,
+        "description": "Optional audio reference. Forma currently accepts one file of this type.",
+        "media": "audio",
+        "maxItems": 1
+      }
+    ]
+  }
+]
