@@ -224,7 +224,7 @@
     {
       "id": 3,
       "type": "FormaApiKeySetup",
-      "title": "Forma \u00b7 API Key Setup \u2014 Start Here",
+      "title": "Forma \u00b7 Text to Video \u00b7 Instructions",
       "pos": [
         680,
         480
@@ -244,7 +244,7 @@
         "Node name for S&R": "FormaApiKeySetup"
       },
       "widgets_values": [
-        "GET YOUR FORMA API KEY\n\n1. Open https://forma.cam and sign in or create an account.\n2. Open Account settings \u2192 API keys \u2192 Create API key.\n3. Name the key (for example ComfyUI) and copy it when shown. It is shown only once.\n4. Add funds in Forma. These nodes use the same account balance.\n\nCONFIGURE COMFYUI\n\nOpen ComfyUI Settings \u2192 Forma \u2192 API key.\nPaste your key in the masked field and click Save and test key.\nThe key is stored privately on this ComfyUI server. No restart is needed.\nUse Remove saved key to disconnect; revoke the key in Forma to disable it everywhere.\n\nAdvanced: FORMA_API_KEY and FORMA_API_KEY_FILE remain supported and take precedence over the UI. A .env file is not loaded automatically.\n\nNEVER paste your key into this text box, any node input, a prompt, or a workflow JSON. This text is saved with the workflow.\n\nOne ComfyUI process uses one Forma account. Anyone who can queue these nodes can spend its balance. Revoke a key in Forma if it is exposed.\n\nIf API keys are not visible in Account settings, the Forma API rollout must be enabled before you can use these nodes.\n\nBefore queueing, review each node's maximum cost in USD cents. Keep run_number unchanged when retrying; increase it only to buy a new generation.\n\nMore help: README.md in runpod-endpoints-comfy"
+        "ABOUT THIS WORKFLOW\n\nCreate a video clip from your prompt.\nEnter a prompt, choose a video model and duration, check the price, then run. No input file is needed.\n\nGET YOUR FORMA API KEY\n\n1. Open https://forma.cam and sign in or create an account.\n2. Open Account settings \u2192 API keys \u2192 Create API key.\n3. Name the key (for example ComfyUI) and copy it when shown. It is shown only once.\n4. Add funds in Forma. These nodes use the same account balance.\n\nCONFIGURE COMFYUI\n\nOpen ComfyUI Settings \u2192 Forma \u2192 API key.\nPaste your key in the masked field and click Save and test key.\nThe key is stored privately on this ComfyUI server. No restart is needed.\nUse Remove saved key to disconnect; revoke the key in Forma to disable it everywhere.\n\nAdvanced: FORMA_API_KEY and FORMA_API_KEY_FILE remain supported and take precedence over the UI. A .env file is not loaded automatically.\n\nNEVER paste your key into this text box, any node input, a prompt, or a workflow JSON. This text is saved with the workflow.\n\nOne ComfyUI process uses one Forma account. Anyone who can queue these nodes can spend its balance. Revoke a key in Forma if it is exposed.\n\nIf API keys are not visible in Account settings, the Forma API rollout must be enabled before you can use these nodes.\n\nBefore queueing, review each node's maximum cost in USD cents. Keep run_number unchanged when retrying; increase it only to buy a new generation.\n\nMore help: README.md in runpod-endpoints-comfy"
       ],
       "color": "#234",
       "bgcolor": "#345"

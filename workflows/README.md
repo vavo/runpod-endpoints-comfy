@@ -1,6 +1,6 @@
 # Workflow examples
 
-In ComfyUI, open **Templates → Extensions → runpod-endpoints-comfy** and click a workflow card. All ten modes below and both image-generation-to-video starters are installed with the custom nodes; users do not need to copy JSON files. After updating the package, restart ComfyUI and refresh the browser. Save an edited workflow normally to keep a personal copy.
+In ComfyUI, open **Templates → Extensions → runpod-endpoints-comfy** and click a workflow card. All ten modes below and both image-generation-to-video starters are installed with the custom nodes; users do not need to copy JSON files. After updating the package, restart ComfyUI and refresh the browser. If previews still show gradients, hard-refresh the page to clear cached missing-image responses. Save an edited workflow normally to keep a personal copy.
 
 Open `choose-model-image-to-video.json` on the ComfyUI canvas for the selectable starter. The original `image-to-video.json` keeps the legacy fixed-model nodes.
 
@@ -41,3 +41,9 @@ The files in `api/` are **API-format graphs** for ComfyUI's `/prompt` endpoint, 
 In the editor, select **Local** on a media input to connect a standard Load Image, Load Video, or Load Audio node. Select **Reference** to reuse a Forma output. Image batches can supply multi-reference fields; audio/video list fields currently accept one clip. Use the built-in save nodes to retain outputs locally.
 
 The same two generic generation nodes cover all these workflows; you do not need a separate node for each model. Changing the selector rebuilds the controls, so check connections afterward.
+
+## Template previews and descriptions
+
+Each canvas JSON has a matching `.jpg` preview, loaded natively by ComfyUI. The previews explain the inputs and output; the existing instructions node includes workflow-specific usage notes followed by API-key setup. Custom-template captions remain filenames because ComfyUI does not currently read separate title/description metadata for extensions.
+
+To update the cards, edit [`scripts/template_cards.json`](../scripts/template_cards.json), then run `python scripts/build_template_cards.py` from the repository root. The builder uses Pillow (already a package dependency) and Arial or DejaVu Sans, updates all 12 previews and instructions nodes, and leaves generation settings and connections unchanged. Keep metadata outside this directory so it is not listed as another workflow.

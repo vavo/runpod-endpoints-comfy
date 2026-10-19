@@ -13,7 +13,7 @@ git clone https://github.com/vavo/runpod-endpoints-comfy.git custom_nodes/runpod
 python -m pip install -r custom_nodes/runpod-endpoints-comfy/requirements.txt
 ```
 
-1. Restart ComfyUI and refresh the browser.
+1. Restart ComfyUI and refresh the browser. If previews still show gradients, hard-refresh the page to clear cached missing-image responses.
 2. At [forma.cam](https://forma.cam), open **Account settings → API keys → Create API key** and add funds to your account.
 3. Open **ComfyUI Settings → Forma → API key**, paste your key, and click **Save and test key**. This checks your balance without spending credits.
 4. Click **Templates → runpod-endpoints-comfy** under **Extensions**, then choose a workflow. All ten modes are included, plus the image-generation-to-video starters. Choose a model, edit the prompt, and click **Check price** before queueing. No JSON copying is needed.
@@ -24,7 +24,7 @@ Requires Python 3.10+, current ComfyUI with native V3 `DynamicCombo`, `VIDEO` an
 
 After installing or updating the nodes, restart ComfyUI and refresh the browser. Open **Templates → Extensions → runpod-endpoints-comfy** and click a card to load a new workflow. The standalone **text-to-image** and **text-to-video** templates need no input files; media-based templates include connected loaders. **choose-model-image-to-video** generates an image and then animates it.
 
-Templates ship with the node package and update with it. Save your edited workflow normally to keep your own copy. The [workflow list](workflows/README.md) also provides direct JSON downloads.
+Templates ship with the node package and update with it. Save your edited workflow normally to keep your own copy. The [workflow list](workflows/README.md) also provides direct JSON downloads. Each preview shows the mode, required inputs, output and a short description. Open the workflow’s **Instructions** node for its usage notes and API-key setup. ComfyUI currently uses filenames as custom-template captions, so the readable descriptions are included in the preview itself.
 
 ![Forma workflows in ComfyUI’s Templates menu](docs/images/templates.png)
 
